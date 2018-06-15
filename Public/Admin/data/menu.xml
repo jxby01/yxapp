@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu>
+	<module>
+		<name id="1">视频</name>
+		<en>video</en>
+		<target>collapse-nav6</target>
+		<icon>am-icon-file-video-o</icon>
+		<controller>
+			<name id="2">视频列表</name>
+			<en>list</en>
+			<link><![CDATA[Video/video]]></link>
+		</controller>
+		<controller>
+			<name id="3">视频分类列表</name>
+			<en>catelist</en>
+			<link><![CDATA[Video/video_fenl]]></link>
+		</controller>
+	</module>
+	<module>
+		<name id="4">权限</name>
+		<en>video</en>
+		<target>collapse-nav4</target>
+		<icon>am-icon-power-off</icon>
+		<controller>
+			<name id="5">权限列表</name>
+			<en>list</en>
+			<link><![CDATA[Power/power_list]]></link>
+		</controller>
+		<controller>
+			<name id="6">管理员列表</name>
+			<en>catelist</en>
+			<link><![CDATA[Power/admin_list]]></link>
+		</controller>
+	</module>
+	<module>
+		<name id="7">新闻资讯</name>
+		<en>video</en>
+		<target>collapse-nav5</target>
+		<icon>am-icon-hacker-news</icon>
+		<controller>
+			<name id="8">新闻列表</name>
+			<en>list</en>
+			<link><![CDATA[News/news_list]]></link>
+		</controller>
+		<controller>
+			<name id="9">增加新闻</name>
+			<en>catelist</en>
+			<link><![CDATA[News/news_add]]></link>
+		</controller>
+		<controller>
+			<name id="10">新闻分类</name>
+			<en>catelist</en>
+			<link><![CDATA[NewsCloumn/cloumn_list]]></link>
+		</controller>
+		<controller>
+			<name id="11">增加分类</name>
+			<en>catelist</en>
+			<link><![CDATA[NewsCloumn/cloumn_add]]></link>
+		</controller>
+	</module>
+	<module>
+		<name id="12">日记</name>
+		<en>video</en>
+		<target>collapse-nav7</target>
+		<icon>am-icon-tencent-weibo</icon>
+		<controller>
+			<name id="13">日记列表</name>
+			<en>list</en>
+			<link><![CDATA[Diary/diary]]></link>
+		</controller>
+	</module>
+</menu>
