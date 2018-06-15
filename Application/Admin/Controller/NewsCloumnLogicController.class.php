@@ -114,7 +114,7 @@ class NewsCloumnLogicController extends CommonController {
     public function cloumn_alldel(){
         $all_id=$_POST['id'];
         $whe['news_cloumn_id']=array('in',$all_id);
-        $rtn=M('news_cloumn')->where($whe)->deleteete();
+        $rtn=M('news_cloumn')->where($whe)->delete();
         echo $rtn;
     }
     /**
@@ -122,6 +122,9 @@ class NewsCloumnLogicController extends CommonController {
      * @return [type] [description]
      * 方法名：权重排序
      *   过程：
+     *         1、post获取组装的关联数组data
+     *         2、修改所有数据的权重
+     *         3、返回处理结果
      */
     public function cloumn_sort(){
         $sort=$_POST['data'];

@@ -98,7 +98,38 @@ class NewsLogicController extends CommonController {
      *         3、返回处理结果
      */
     public function news_del(){
-
+        echo M('news')->delete($_POST['news_id']);
+    }
+    /**
+     * [news_alldel description]
+     * @return [type] [description]
+     * 方法名：删除所有选中的id数据
+     *   过程：
+     *         1、post接收选中的id
+     *         2、删除选中的id数据
+     *         3、返回处理结果
+     */
+    public function news_alldel(){
+        $all_id=$_POST['id'];
+        $whe['news_id']=array('in',$all_id);
+        $rtn=M('news')->where($whe)->delete();
+        echo $rtn;
+    }
+    /**
+     * [news_sort description]
+     * @return [type] [description]
+     * 方法名：权重排序
+     *   过程：
+     *         1、post获取组装的关联数组data
+     *         2、修改所有数据的权重
+     *         3、返回处理结果
+     */
+    public function news_sort(){
+        $sort=$_POST['data'];
+        foreach ($sort as $key => $value) {
+            M('news')->where(array('news_id'=>$key))->save(array('sort'=>$value));
+        }
+        echo '操作成功';
     }
     /**
      * [news_search description]
@@ -111,6 +142,6 @@ class NewsLogicController extends CommonController {
      *         4、传值，渲染搜索列表
      */
     public function news_search(){
-
+        
     }
 }
