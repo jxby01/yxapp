@@ -6,5 +6,16 @@ class BaseController extends CommonController {
 		
        	$this->view();
     }
-
+	public function base_details(){
+			
+	    $this->view();
+	}
+	public function add_base(){
+			
+	    $this->view();
+	}
+	public function add_basefenl(){
+			
+	    $this->view();
+	}
 }

@@ -77,12 +77,12 @@
 		<controller>
 			<name id="15">基地列表</name>
 			<en>list</en>
-			<link><![CDATA[Diary/diary]]></link>
+			<link><![CDATA[Base/base]]></link>
 		</controller>
 		<controller>
 			<name id="16">基地分类列表</name>
 			<en>list</en>
-			<link><![CDATA[Diary/diary]]></link>
+			<link><![CDATA[Base/base_details]]></link>
 		</controller>
 	</module>
 </menu>
