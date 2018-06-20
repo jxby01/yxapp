@@ -3,27 +3,29 @@ namespace Admin\Controller;
 use Think\Controller;
 class DiaryController extends CommonController {
     public function diary(){
-//  	I('title')?$condition['title'] = array('like','%'.I('title').'%'):false;
-//  	I('classify')?$condition['classify'] = array('like','%'.I('classify').'%'):false;
-    	$diary = M('diary')->page($p,'10')->order('id desc')->select();
+    	I('diary_title')?$condition['diary_title'] = array('like','%'.I('diary_title').'%'):false;
+    	I('username')?$condition['username'] = array('like','%'.I('username').'%'):false;
+    	I('home_page')?$condition['home_page'] = I('home_page'):false;
+    	$condition['recommend'] = 2;
+    	$diary = M('diary')->where($condition)->page($p,'10')->order('zan desc')->select();
     	foreach($diary as $k=>$v){
-    		if($v['recommend']==0){
-    			$diary[$k]['laoshi'] = '否';
-    		}else{
-    			$diary[$k]['laoshi'] = '是';
-    		}
-    		if($v['home_page']==0){
+    		if($v['home_page']==1){
     			$diary[$k]['shouye'] = '推荐首页';
     		}else{
     			$diary[$k]['shouye'] = '取消推荐';
     		}
     	}
-    	$num = M('diary')->order('id desc')->count();
+    	$zan_time = M('diary_zan')->where("id=1")->find();
+    	$zan_time['start_time'] = date('Y-m-d',$zan_time['start_time']);
+    	$zan_time['end_time'] = date('Y-m-d',$zan_time['end_time']);
+    	
+    	$num = M('diary')->order('zan desc')->count();
     	$Page       = new \Think\Page($num,10);// 实例化分页类 传入总记录数和每页显示的记录数
 		$show       = $Page->show();// 分页显示输出
 		$this->assign('page',$show);
     	$this->assign('diary',$diary);
     	$this->assign('num',$num);
+    	$this->assign('zan_time',$zan_time);
        	$this->view();
     }
     //推荐首页修改
@@ -106,5 +108,24 @@ class DiaryController extends CommonController {
     	}
     	$this->assign('di',$di);
     	$this->view();
+    }
+    public function time_diary(){
+    	$data['start_time'] = strtotime(I('start_time'));
+    	$data['end_time'] = strtotime(I('end_time'));
+    	if($data['start_time']==''){
+    		$this->error('设置失败,请选择开始时间！');
+    	}else if($data['end_time']==''){
+    		$this->error('设置失败,请选择结束时间！');
+    	}else if($data['start_time']>$data['end_time']){
+    		$this->error('设置失败,开始时间不能大于结束时间！');
+    	}else{
+    		$zan = M('diary_zan')->where("id=1")->save($data);
+    		if($zan){
+    			$this->success('设置成功', '/Admin/Diary/diary');
+    		}else{
+    			$this->error('设置失败！');
+    		}
+    		
+    	}
     }
 }

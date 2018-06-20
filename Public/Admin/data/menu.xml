@@ -69,4 +69,15 @@
 			<link><![CDATA[Diary/diary]]></link>
 		</controller>
 	</module>
+	<module>
+		<name id="12">基地</name>
+		<en>video</en>
+		<target>collapse-nav7</target>
+		<icon>am-icon-tencent-weibo</icon>
+		<controller>
+			<name id="13">日记列表</name>
+			<en>list</en>
+			<link><![CDATA[Diary/diary]]></link>
+		</controller>
+	</module>
 </menu>
