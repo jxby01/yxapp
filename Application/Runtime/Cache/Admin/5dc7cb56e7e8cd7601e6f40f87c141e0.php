@@ -9,7 +9,7 @@
 				<div class="card-box">
 					<!-- Row start -->
 					<div class="am-g">
-						<div class="am-u-sm-12 am-u-md-6">
+						<div class="am-u-sm-12 am-u-md-4">
 				          <div class="am-btn-toolbar">
 				            <div class="am-btn-group am-btn-group-xs">
 				              <button type="button" class="am-btn am-btn-default"><a href="<?php echo U('News/news_add');?>"><span class="am-icon-plus"></span> 新增</a></button>
@@ -19,16 +19,31 @@
 				            </div>
 				          </div>
 				        </div>	
-				        
-						<div class="am-u-sm-12 am-u-md-3">
-				          <div class="am-input-group am-input-group-sm">
-				            <input type="text" class="am-form-field">
-				          <span class="am-input-group-btn">
-				            <button class="am-btn am-btn-default" type="button">搜索</button>
-				          </span>
-				          </div>
-				        </div>
-				      </div>
+						<form action="<?php echo U('NewsLogic/news_screen');?>" method="post">
+							<div class="am-u-sm-12 am-u-md-3">
+								按 时间：<input type="date" name="start" value="<?php echo date('Y-m-d',time());?>" >--<input type="date" name="end" value="<?php echo date('Y-m-d',time());?>" >
+							</div>
+						    <div class="am-u-sm-6 am-u-md-2" style="float: left;">
+					          分类:
+						      <select name="news_cloumn_id">
+						      <option value="">选择分类</option>
+						       <?php if(is_array($cloumn)): foreach($cloumn as $key=>$val): ?><option value="<?php echo ($val['news_cloumn_id']); ?>"><?php echo ($val['name']); ?></option><?php endforeach; endif; ?>
+						      </select>
+						       <button type="" class="am-btn am-btn-default" style="padding: 0;"> 筛选</button>
+					        </div>
+						</form>
+				        <form action="<?php echo U('NewsLogic/news_search');?>" method="post">
+							
+							<div class="am-u-sm-8 am-u-md-2">
+					          <div class="am-input-group am-input-group-sm">
+					            <input type="text" name="content" class="am-form-field">
+					          <span class="am-input-group-btn">
+					            <button class="am-btn am-btn-default" type="">搜索</button>
+					          </span>
+					          </div>
+					        </div>
+				        </form>
+				    </div>
 					  <!-- Row end -->
 					  
 					  <!-- Row start -->
@@ -38,7 +53,14 @@
             <table class="am-table am-table-striped am-table-hover table-main">
               <thead>
               <tr>
-                <th class="table-check"><input type="checkbox" id="all" name="all" onclick="checkAll()" /></th><th class="table-id">ID</th><th class="table-title">标题</th><th class="table-type">权重排序</th><th class="table-author am-hide-sm-only">操作者</th><th class="table-date am-hide-sm-only">修改日期</th><th class="table-set">操作</th>
+                <th class="table-check"><input type="checkbox" id="all" name="all" onclick="checkAll()" /></th>
+                <th class="table-id">ID</th>
+                <th class="table-title">标题</th>
+                <th class="table-type">权重排序</th>
+                <th class="table-type">分类</th>
+                <th class="table-author am-hide-sm-only">操作者</th>
+                <th class="table-date am-hide-sm-only">修改日期</th>
+                <th class="table-set">操作</th>
               </tr>
               </thead>
               <tbody>
@@ -47,13 +69,14 @@
                   <td><?php echo ($val['news_id']); ?></td>
                   <td><?php echo ($val['title']); ?></td>
                   <td><input style="max-width: 60px;max-height: 26px;" value="<?php echo ($val['sort']); ?>" name="sort" data-id="<?php echo ($val['news_id']); ?>" type="number" width="" /></td>
+                  <td class="am-hide-sm-only"><?php echo ($val['cloumn']); ?></td>
                   <td class="am-hide-sm-only"><?php echo ($val['admin_name']); ?></td>
                   <td class="am-hide-sm-only"><?php echo date('Y-m-d H:i:s',$val['start_time']);?></td>
                   <td>
                     <div class="am-btn-toolbar">
                       <div class="am-btn-group am-btn-group-xs">
-                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><a href="<?php echo U('News/news_eitd');?>?news_id=<?php echo ($val['news_id']); ?>"><span class="am-icon-pencil-square-o"></span> 编辑</a></button>
-                        <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 复制</button>
+                        <a href="<?php echo U('News/news_eitd');?>?news_id=<?php echo ($val['news_id']); ?>" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</a>
+                        <!-- <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 复制</button> -->
                         <button type="button" data-id="<?php echo ($val['news_id']); ?>" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only shanc"><span class="am-icon-trash-o"></span> 删除</button>
                       </div>
                     </div>

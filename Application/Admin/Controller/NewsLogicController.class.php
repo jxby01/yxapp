@@ -59,7 +59,6 @@ class NewsLogicController extends CommonController {
      *         4、返回处理结果
      */
     public function news_eitd(){
-        header('Content-Type: text/html; charset=utf-8');
         $news_id=$_POST['news_id'];
         $data['title']=$_POST['title'];
         $data['news_cloumn_id']=$_POST['news_cloumn_id'];
@@ -142,6 +141,73 @@ class NewsLogicController extends CommonController {
      *         4、传值，渲染搜索列表
      */
     public function news_search(){
-        
+        if(!$_POST['content']){
+            alert('请输入搜索内容',2500,2);
+            exit;
+        }
+        $content=$_POST['content'];
+        $count      = M('news')->where("state=1 and title like '%".$content."%'")->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,15);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show       = $Page->show();// 分页显示输出
+        // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+        $news = M('news')->where("state=1 and title like '%".$content."%'")->order('sort desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+        foreach($news as $k=>$val){
+            $admin=M('admin')->find($val['admin_id']);
+            $news[$k]['admin_name']=$admin['admin_name'];
+            $cloumn=M('news_cloumn')->find($val['news_cloumn_id']);
+            $news[$k]['cloumn']=$cloumn['name'];
+        }
+        $cloumn=M('news_cloumn')->where(array('state'=>1))->order('news_cloumn_id desc')->select();
+        $this->assign('cloumn',$cloumn);
+        $this->assign('count',$count);
+        $this->assign('news',$news);// 赋值数据集
+        $this->assign('page',$show);// 赋值分页输出
+        $this->view('news_list_search');
+       
+    }
+    /**
+     * [news_screen description]
+     * @return [type] [description]
+     * 方法名：新闻列表筛选
+     *   过程：
+     *         1、post接收筛选条件
+     *         2、查询满足筛选条件的所有数据
+     *         3、对数据进行分页
+     *         4、返回处理结果
+     *         5、传值、渲染筛选列表
+     */
+    public function news_screen(){
+        if(!$_POST['start'] && !$_POST['end'] && !$_POST['news_cloumn_id']){
+            alert('请选择筛选条件',2500,2);
+            exit;
+        }
+        if($_POST['start']){
+            $starttime=strtotime($_POST['start']);
+            $tmp['start_time']=array('EGT',$starttime);
+        }
+        if($_POST['end']){
+            $endtime=strtotime($_POST['end'])+24*3600-1;//结束时间的23:59
+            $tmp['start_time']=array('ELT',$endtime);
+        }
+        if($_POST['news_cloumn_id']){
+            $tmp['news_cloumn_id']=$_POST['news_cloumn_id'];
+        }
+        $count      = M('news')->where($tmp)->count();// 查询满足要求的总记录数
+        $Page       = new \Think\Page($count,15);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+        $show       = $Page->show();// 分页显示输出
+        // 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+        $news = M('news')->where($tmp)->order('sort desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+        foreach($news as $k=>$val){
+            $admin=M('admin')->find($val['admin_id']);
+            $news[$k]['admin_name']=$admin['admin_name'];
+            $cloumn=M('news_cloumn')->find($val['news_cloumn_id']);
+            $news[$k]['cloumn']=$cloumn['name'];
+        }
+        $cloumn=M('news_cloumn')->where(array('state'=>1))->order('news_cloumn_id desc')->select();
+        $this->assign('cloumn',$cloumn);
+        $this->assign('count',$count);
+        $this->assign('news',$news);// 赋值数据集
+        $this->assign('page',$show);// 赋值分页输出
+        $this->view('news_list_screen');
     }
 }
