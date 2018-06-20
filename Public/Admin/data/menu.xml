@@ -70,12 +70,17 @@
 		</controller>
 	</module>
 	<module>
-		<name id="12">基地</name>
+		<name id="14">基地</name>
 		<en>video</en>
-		<target>collapse-nav7</target>
-		<icon>am-icon-tencent-weibo</icon>
+		<target>collapse-nav8</target>
+		<icon>am-icon-database</icon>
 		<controller>
-			<name id="13">日记列表</name>
+			<name id="15">基地列表</name>
+			<en>list</en>
+			<link><![CDATA[Diary/diary]]></link>
+		</controller>
+		<controller>
+			<name id="16">基地分类列表</name>
 			<en>list</en>
 			<link><![CDATA[Diary/diary]]></link>
 		</controller>
