@@ -24,7 +24,11 @@ class NewsController extends CommonController {
         foreach($news as $k=>$val){
             $admin=M('admin')->find($val['admin_id']);
             $news[$k]['admin_name']=$admin['admin_name'];
+            $cloumn=M('news_cloumn')->find($val['news_cloumn_id']);
+            $news[$k]['cloumn']=$cloumn['name'];
         }
+        $cloumn=M('news_cloumn')->where(array('state'=>1))->order('news_cloumn_id desc')->select();
+        $this->assign('cloumn',$cloumn);
         $this->assign('count',$count);
         $this->assign('news',$news);// 赋值数据集
         $this->assign('page',$show);// 赋值分页输出
