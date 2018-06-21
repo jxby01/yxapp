@@ -17,11 +17,17 @@
 								    </div>
 								    
 								   <div class="layui-upload">
-<if condition="$ba['img']!=''">
+
+                                                    <div class="layui-upload-list">
+                                                       <if condition="$ba['img']!=''">
                                                         <img style="width: 84px;height: 84px;margin-bottom: 12px;" class="layui-upload-img" src="__ROOT__/{$ba.img}" id="demo1">
                                                         <else/>
                                                          <img style="width: 84px;height: 84px;margin-bottom: 12px;" class="layui-upload-img" src="" id="demo1">
                                                         </if>
+                                                        <input type="hidden" name="img" id="base_img" value="{$ba.img}" />
+                                                        <p></p>
+                                                        <button style="font-size: 12px;height: 30px;line-height: 30px;" type="button" class="layui-btn" id="test1">选择图片</button>
+                                                    </div>
                                                 </div>
                                                 
 								    <div class="am-form-group">
