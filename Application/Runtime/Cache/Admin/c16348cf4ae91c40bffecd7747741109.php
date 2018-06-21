@@ -51,7 +51,9 @@
             </table>
             <div class="am-cf">
               共 <?php echo ($num); ?> 条记录
-              
+              <div class="am-fr">
+                	<?php echo ($page); ?>
+              </div>
             </div>
             
           </form>

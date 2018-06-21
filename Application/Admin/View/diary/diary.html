@@ -30,7 +30,7 @@
 					          </div>
 					        </div>
 				        </form>
-						<form action="{:U('Admin/Diary/diary')}" method="post" enctype="multipart/form-data">
+						<form action="{:U('Admin/Diary/diary')}" method="get" enctype="multipart/form-data">
 					        <div class="am-u-sm-12 am-u-md-2" style="float: right;padding-left:0;">
 					          <div class="am-input-group am-input-group-sm">
 					            <input name="diary_title" type="text" class="am-form-field" placeholder="请输入日记标题" >
@@ -103,7 +103,7 @@
 	                <td>{$v.zan}</td>
 	                <td> 
 	                	<div class="am-btn am-btn-xs am-text-secondary tjshouye <?php echo $v['home_page']==1?tjdaoshouy:quxiaotuijian;?>" data-id="{$v.id}" title="点击改变状态" data-ho="{$v.home_page}">{$v.shouye}</div> 
-<!--	                	<div class="am-btn am-btn-xs am-text-secondary youxiuriji <?php echo $v['home_page']==0?di:'';?> <?php echo $v['excellent']==0?tjdaoshouy:quxiaotuijian;?>"  title="点击改变状态" data-id="{$v.id}" data-ex="{$v.excellent}">优秀日记</div> -->
+	                	<div class="am-btn am-btn-xs am-text-secondary youxiuriji <?php echo $v['home_page']==1?di:'';?> <?php echo $v['excellent']==1?tjdaoshouy:quxiaotuijian;?>"  title="点击改变状态" data-id="{$v.id}" data-ex="{$v.excellent}">优秀日记</div> 
 	                </td>
 	                <td>
 	                  <div class="am-btn-toolbar">
@@ -169,40 +169,40 @@
 						  
 						});
 					})
-//					$('.youxiuriji').click(function(){
-//						var did = $(this).attr('data-id');
-//						var ex = $(this).attr('data-ex');
-//						if(ex==0){
-//							var neiro = '是否修改为优秀日记？';
-//						}else{
-//							var neiro = '是否取消优秀日记？';
-//						}
-//						layer.confirm(neiro, {
-//						  btn: ['确定','取消'] //按钮
-//						}, function(){
-//							$.ajax({
-//					            url:"{:U('Admin/Diary/yxxiugai')}",
-//					            type:"post",
-//					            data:{
-//					            	did:did,
-//					            	ex:ex
-//					            },
-//					            success:function(e){
-//					            	if(e==1){
-//					            		layer.msg('修改成功！', {icon: 1});
-//					            		setTimeout(shuax,500);
-//					            		function shuax(){
-//					            			window.location.reload();
-//					            		}
-//					            	}else{
-//					            		layer.msg('修改失败！', {icon: 2});
-//					            	}
-//					            },
-//					       	});
-//						}, function(){
-//						  
-//						});
-//					})
+					$('.youxiuriji').click(function(){
+						var did = $(this).attr('data-id');
+						var ex = $(this).attr('data-ex');
+						if(ex==1){
+							var neiro = '是否修改为优秀日记？';
+						}else{
+							var neiro = '是否取消优秀日记？';
+						}
+						layer.confirm(neiro, {
+						  btn: ['确定','取消'] //按钮
+						}, function(){
+							$.ajax({
+					            url:"{:U('Admin/Diary/yxxiugai')}",
+					            type:"post",
+					            data:{
+					            	did:did,
+					            	ex:ex
+					            },
+					            success:function(e){
+					            	if(e==1){
+					            		layer.msg('修改成功！', {icon: 1});
+					            		setTimeout(shuax,500);
+					            		function shuax(){
+					            			window.location.reload();
+					            		}
+					            	}else{
+					            		layer.msg('修改失败！', {icon: 2});
+					            	}
+					            },
+					       	});
+						}, function(){
+						  
+						});
+					})
 					$('.shanc').click(function(){
 						var id = $(this).attr('data-id');
 						layer.confirm('是否删除该日记信息？', {
