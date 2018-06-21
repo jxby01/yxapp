@@ -64,6 +64,31 @@ class CommonController extends Controller{
         $imgs = 'Public/upload/'.$info['file']['savepath'].$info['file']['savename'];
         exit(json_encode(array("code"=>0,"msg"=>'上传成功','src'=>$imgs)));//返回到JS中进行处理
     }
-	
+
+    /**
+     * 操作日志记录
+     */
+    public function write_in($do,$content)
+    {
+        $arr = array($_SESSION['admin_name'],date('Y年m月d日 H时i分'),$_SERVER["REMOTE_ADDR"],$do,$content);
+        $con = file_get_contents('Public/Admin/data/admin_config.php');
+        $con = substr($con, 6);
+        preg_match_all('/\/\/[\s\S]*?\/\/\}/i', $con, $match);
+        foreach ($match[0] as $v) {
+            $str = substr($v, 0, -3);
+            $row[] = $str;
+        }
+        foreach ($row as $k => $val) {
+            $evals = "return array(
+			$val
+			);";
+            $rows[$k][] = eval($evals);
+            preg_match_all('/(?<=\/\/)[\s\S]*?(?=\n)/i', $val, $match);
+            $match[0][0] = substr($match[0][0], 0, -2);
+        }
+        if($rows[0][0]['if_write_in'] == 1){
+            write_log($arr);
+        }
+    }
 }
 ?>
