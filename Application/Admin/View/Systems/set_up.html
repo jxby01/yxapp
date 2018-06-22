@@ -8,13 +8,13 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">记录日志</label>
                     <div class="layui-input-block">
-                        <input type="checkbox" lay-skin="switch" id="log" lay-filter="switchlog" lay-text="ON|OFF">
+                        <input type="checkbox" lay-skin="switch" id="log" <?php if($rows['if_write_in'] == 1){echo "checked=''";}?> lay-filter="switchlog" lay-text="ON|OFF">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">开启手机APP</label>
                     <div class="layui-input-block">
-                        <input type="checkbox"  lay-skin="switch" id="power" lay-filter="switchapp" lay-text="ON|OFF">
+                        <input type="checkbox"  lay-skin="switch" id="power" lay-filter="switchapp" <?php if($rows['Software_power'] == 'on'){echo "checked=''";}?> lay-text="ON|OFF">
                     </div>
                 </div>
                 </form>
@@ -28,21 +28,6 @@
 <script type="text/javascript" src="__PUBLIC__/Admin/assetsl/js/jquery-2.1.0.js" ></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
-    $(function () {
-        $.ajax({
-            type:'post',
-            data:'{}',
-            url:'{:U("Admin/Systems/now_log_state")}',
-            success:function (e) {
-                if(e.if_write_in == 1){
-                    $("#log").attr('checked',true)
-                }
-                if(e.Software_power == 'on'){
-                    $("#power").attr('checked',true)
-                }
-            }
-        })
-    })
     layui.use(['form', 'layedit', 'laydate'], function(){
         var form = layui.form,
             layer = layui.layer;

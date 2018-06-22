@@ -3,6 +3,22 @@ namespace Admin\Controller;
 use Think\Controller;
 class SystemsController extends CommonController{
     public function set_up(){
+        $con = file_get_contents('Public/Admin/data/admin_config.php');
+        $cons = substr($con, 6);
+        preg_match_all('/\/\/[\s\S]*?\/\/\}/i', $cons, $match);
+        foreach ($match[0] as $v) {
+            $str = substr($v, 0, -3);
+            $row[] = $str;
+        }
+        foreach ($row as $k => $val) {
+            $evals = "return array(
+			$val
+			);";
+            $rows[$k][] = eval($evals);
+            preg_match_all('/(?<=\/\/)[\s\S]*?(?=\n)/i', $val, $match);
+            $match[0][0] = substr($match[0][0], 0, -2);
+        }
+        $this->assign('rows',$rows[0][0]);
         $this->view();
     }
 
