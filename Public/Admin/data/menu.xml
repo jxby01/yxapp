@@ -85,4 +85,39 @@
 			<link><![CDATA[Base/base_details]]></link>
 		</controller>
 	</module>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--请保证此项处于底部-->
+	<module>
+		<name id="99">系统设置</name>
+		<en>video</en>
+		<target>collapse-nav99</target>
+		<icon>am-icon-gear</icon>
+		<controller>
+			<name id="100">配置设置</name>
+			<en>list</en>
+			<link><![CDATA[Systems/set_up]]></link>
+		</controller>
+		<controller>
+			<name id="101">日志文件</name>
+			<en>list</en>
+			<link><![CDATA[Systems/proview_logs]]></link>
+		</controller>
+
+	</module>
 </menu>

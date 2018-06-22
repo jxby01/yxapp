@@ -70,7 +70,7 @@ class CommonController extends Controller{
      */
     public function write_in($do,$content)
     {
-        $arr = array($_SESSION['admin_name'],date('Y年m月d日 H时i分'),$_SERVER["REMOTE_ADDR"],$do,$content);
+        $arr = array($_SESSION['admin_name'],date('Y年m月d日 H时i分s秒'),$_SERVER["REMOTE_ADDR"],$do,$content);
         $con = file_get_contents('Public/Admin/data/admin_config.php');
         $con = substr($con, 6);
         preg_match_all('/\/\/[\s\S]*?\/\/\}/i', $con, $match);
