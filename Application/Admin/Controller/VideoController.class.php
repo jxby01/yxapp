@@ -15,6 +15,8 @@ class VideoController extends CommonController {
     	$vifl = M('videofenlei')->select();
     	$num = M('video')->where($condition)->order('id desc')->count();
     	$Page       = new \Think\Page($num,10);// 实例化分页类 传入总记录数和每页显示的记录数
+    	//保持搜索条件分页
+    	$Page->parameter   =   array("title"=>I('title'),"classify"=>I('classify'));
 		$show       = $Page->show();// 分页显示输出
 		$this->assign('page',$show);
     	$this->assign('vifl',$vifl);
@@ -101,9 +103,13 @@ class VideoController extends CommonController {
 	}
 	//视频分类列表
 	public function video_fenl(){
-		$video = M('videofenlei')->select();
+		$p=I('p') ? I('p'):1;
+		$video = M('videofenlei')->page($p,'10')->order('id desc')->select();
     	$num = M('videofenlei')->count();
+    	$Page       = new \Think\Page($num,10);// 实例化分页类 传入总记录数和每页显示的记录数
+		$show       = $Page->show();// 分页显示输出
     	$this->assign('video',$video);
+    	$this->assign('page',$show);
     	$this->assign('num',$num);
 		$this->view();
 	}

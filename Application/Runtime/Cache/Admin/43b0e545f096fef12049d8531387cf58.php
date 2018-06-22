@@ -15,7 +15,7 @@
 				          </div>
 				        </div>	
 				        
-						<form action="<?php echo U('Admin/Video/video');?>" method="post" enctype="multipart/form-data">
+						<form action="<?php echo U('Admin/Video/video');?>" method="get" enctype="multipart/form-data">
 							
 					        <div class="am-u-sm-12 am-u-md-3" style="float: right;">
 					          <div class="am-input-group am-input-group-sm">
@@ -29,7 +29,7 @@
 					        <div class="am-u-sm-12 am-u-md-2" style="float: right;margin-right: 1em;">
 								<div class="am-input-group am-input-group-sm">
 						          	<select name="classify" style="height:33px;">
-								    	<option value="">-=请选择一项=-</option>
+								    	<option value="">-=请选择分类=-</option>
 								    	<?php if(is_array($vifl)): foreach($vifl as $key=>$v): ?><option value="<?php echo ($v["id"]); ?>"><?php echo ($v["title"]); ?></option><?php endforeach; endif; ?>
 									</select>
 						        </div>
