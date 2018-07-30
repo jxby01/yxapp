@@ -101,6 +101,43 @@
 			<link><![CDATA[Line/line_details]]></link>
 		</controller>
 	</module>
+	<module>
+		<name id="20">用户提醒</name>
+		<en>notice</en>
+		<target>collapse-nav9</target>
+		<icon>am-icon-database</icon>
+		<controller>
+			<name id="21">出行提醒--学生</name>
+			<en>list</en>
+			<link><![CDATA[Notice/student]]></link>
+		</controller>
+		<controller>
+			<name id="22">出行提醒--辅导员</name>
+			<en>list</en>
+			<link><![CDATA[Notice/instructor]]></link>
+		</controller>
+		<controller>
+			<name id="23">生日提醒</name>
+			<en>list</en>
+			<link><![CDATA[Notice/birthday]]></link>
+		</controller>
+	</module>
+	<module>
+		<name id="24">站内通知提醒</name>
+		<en>notice</en>
+		<target>collapse-nav24</target>
+		<icon>am-icon-database</icon>
+		<controller>
+			<name id="25">通知记录</name>
+			<en>list</en>
+			<link><![CDATA[Remind/remind_list]]></link>
+		</controller>
+		<controller>
+			<name id="25">发布通知</name>
+			<en>list</en>
+			<link><![CDATA[Remind/remind_add]]></link>
+		</controller>
+	</module>
 
 
 
