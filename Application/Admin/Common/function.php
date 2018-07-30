@@ -13,9 +13,10 @@
      * 日志文件
      */
  function write_log($data){
+     $da = json_encode($data);
     $years = date('Y-m');
     //设置路径目录信息
-    $url = './public/log/txlog/'.$years.'/'.date('Ymd').'_request_log.txt';
+    $url = './public/log/txlog/admin_logs.txt';
     $dir_name=dirname($url);
     //目录不存在就创建
     if(!file_exists($dir_name))
@@ -24,7 +25,7 @@
         $res = mkdir(iconv("UTF-8", "GBK", $dir_name),0777,true);
     }
     $fp = fopen($url,"a");//打开文件资源通道 不存在则自动创建
-    fwrite($fp,var_export($data,true)."\r\n");//写入文件
+    fwrite($fp,$da."\r\n");//写入文件
     fclose($fp);//关闭资源通道
 }
 ?>

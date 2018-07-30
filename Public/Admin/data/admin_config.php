@@ -1,10 +1,10 @@
 <?php
 return array(
-    //第一条{
-
-    //操作日志开启 1开启  0关闭
-    'if_write_in'=>'1',
-    //软件状态  on开启  off关闭
+    //first{
+    //是否开启日志记录
+    'if_write_in'=>'0',
+    //是否开启APP
     'Software_power'=>'on',
-//}
-);
+    //}
+)
+?>

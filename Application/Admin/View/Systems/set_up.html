@@ -1,0 +1,78 @@
+<div class="content-page">
+<!-- Start content -->
+<div class="content">
+    <div class="card-box"  style="height: 700px;">
+        <div class="am-g">
+            <div class="am-u-sm-12">
+                <form class="layui-form" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">记录日志</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" lay-skin="switch" id="log" <?php if($rows['if_write_in'] == 1){echo "checked=''";}?> lay-filter="switchlog" lay-text="ON|OFF">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">开启手机APP</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox"  lay-skin="switch" id="power" lay-filter="switchapp" <?php if($rows['Software_power'] == 'on'){echo "checked=''";}?> lay-text="ON|OFF">
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <!-- Row end -->
+    </div>
+</div>
+</div>
+<script src="__PUBLIC__/Admin/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/assetsl/js/jquery-2.1.0.js" ></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form,
+            layer = layui.layer;
+        //监听指定开关
+        form.on('switch(switchlog)', function(data){
+            var state = this.checked ? 1 : 0;
+            var statename = 'if_write_in';
+            $.ajax({
+                type:'post',
+                data:{state:state,statename:statename},
+                url:'{:U("Admin/Systems/if_log")}',
+                success:function (e) {
+                    if(e == 1){
+                        layer.msg('操作成功', {
+                            offset: '6px'
+                        });
+                    }else{
+                        layer.msg('网络出错', {
+                            offset: '6px'
+                        });
+                    }
+                }
+            })
+
+        });
+
+        form.on('switch(switchapp)', function(data){
+            var state = this.checked ? 'on' : 'off';
+            var statename = 'Software_power';
+            $.ajax({
+                type:'post',
+                data:{state:state,statename:statename},
+                url:'{:U("Admin/Systems/if_log")}',
+                success:function (e) {
+                    if(e == 1){
+                        layer.msg('操作成功', {
+                            offset: '6px'
+                        });
+                    }else{
+                        layer.msg('网络出错', {
+                            offset: '6px'
+                        });
+                    }
+                }
+            })
+        });
+    });
+</script>
