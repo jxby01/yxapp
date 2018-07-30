@@ -3,7 +3,7 @@ return array(
 	//'配置项'=>'配置值'
 	 /* 数据库设置 */
     'DB_TYPE'               =>  'mysql',     // 数据库类型
-    'DB_HOST'               =>  '192.168.0.118', // 服务器地址
+    'DB_HOST'               =>  '192.168.0.126', // 服务器地址
     'DB_NAME'               =>  'zidao',          // 数据库名
     'DB_USER'               =>  'zidao',      // 用户名
     'DB_PWD'                =>  'zidao',          // 密码

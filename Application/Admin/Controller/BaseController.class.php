@@ -5,6 +5,7 @@ class BaseController extends CommonController {
     public function base(){
     	I('title')?$condition['title'] = array('like','%'.I('title').'%'):false;
     	I('base_cloumn_id')?$condition['base_cloumn_id'] = I('base_cloumn_id'):false;
+    	$p=I('p') ? I('p'):1;
 		$base = M('base')->where($condition)->page($p,'10')->order('base_id desc')->select();
 		foreach($base as $k=>$v){
 			$id['base_cloumn_id'] = $v['base_cloumn_id'];
@@ -47,7 +48,7 @@ class BaseController extends CommonController {
 			if($data['title']==''){
 				$this->error('添加失败,请填写名称！');
 			}else if($data['img']==''){
-				$this->error('添加失败,请选择分类图！');
+				$this->error('添加失败,请选择基地图！');
 			}else if($data['content']==''){
 				$this->error('添加失败,请填写介绍！');
 			}else if($data['base_cloumn_id']==''){
@@ -61,7 +62,7 @@ class BaseController extends CommonController {
 			if($data['title']==''){
 				$this->error('修改失败,请填写名称！');
 			}else if($data['img']==''){
-				$this->error('修改失败,请选择分类图！');
+				$this->error('修改失败,请选择基地图！');
 			}else if($data['content']==''){
 				$this->error('修改失败,请填写介绍！');
 			}else if($data['base_cloumn_id']==''){
