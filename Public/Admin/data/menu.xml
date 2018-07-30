@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu>
-	<module>
+	<!-- <module>
 		<name id="1">视频</name>
 		<en>video</en>
 		<target>collapse-nav6</target>
@@ -15,7 +15,7 @@
 			<en>catelist</en>
 			<link><![CDATA[Video/video_fenl]]></link>
 		</controller>
-	</module>
+	</module> -->
 	<module>
 		<name id="4">权限</name>
 		<en>video</en>
@@ -58,7 +58,7 @@
 			<link><![CDATA[NewsCloumn/cloumn_add]]></link>
 		</controller>
 	</module>
-	<module>
+	<!-- <module>
 		<name id="12">日记</name>
 		<en>video</en>
 		<target>collapse-nav7</target>
@@ -68,7 +68,7 @@
 			<en>list</en>
 			<link><![CDATA[Diary/diary]]></link>
 		</controller>
-	</module>
+	</module> -->
 	<module>
 		<name id="14">基地</name>
 		<en>video</en>
