@@ -85,7 +85,22 @@
 			<link><![CDATA[Base/base_details]]></link>
 		</controller>
 	</module>
-
+	<module>
+		<name id="17">线路</name>
+		<en>line</en>
+		<target>collapse-nav17</target>
+		<icon>am-icon-line-chart</icon>
+		<controller>
+			<name id="18">线路列表</name>
+			<en>list</en>
+			<link><![CDATA[Line/line]]></link>
+		</controller>
+		<controller>
+			<name id="19">线路主题</name>
+			<en>list</en>
+			<link><![CDATA[Line/line_details]]></link>
+		</controller>
+	</module>
 
 
 

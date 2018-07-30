@@ -1,0 +1,32 @@
+<div class="content-page">
+	<div class="content">
+		<div class="am-u-md-6">
+			<div class="card-box">
+				<if condition="$bi==1">
+					<h4 class="header-title m-t-0 m-b-30">添加线路主题</h4>
+				<else/>
+					<h4 class="header-title m-t-0 m-b-30">修改线路主题</h4>
+				</if>
+				<h4 class="header-title m-t-0 m-b-30"></h4>
+				<form class="am-form" action="{:U('Admin/Goods/addgoods')}" method="post" enctype="multipart/form-data">
+					<div class="am-form-group">
+				      	<label for="doc-ipt-email-2">主题名称：</label>
+				      	<input type="text" name="shangp_name" value="{$news.shangp_name}"  class="am-radius" style="width:50%;display: inline;" placeholder="请输入主题名称">
+				    </div>
+                    <div class="am-form-group">
+				      	<label for="doc-vld-ta-2">主题介绍：</label>
+				      	<textarea name="content" id="doc-vld-ta-2" class="textarea" placeholder="请输入主题介绍" style="width:100%;height:200px;">{$news.content}</textarea>
+				    </div>
+					<input type="hidden" name="id" id="" value="{$news.id}" />
+					<input type="hidden" value="{$bi}" name="bi">
+					<input type="hidden" value="{$news.img}" name="img" id="img">
+				    <button type="submit" class="am-btn am-btn-primary">提交</button>
+				</form>
+				<!--<hr/>
+            	<p>注：预定退订扣除所设置的百分比手续费。</p>-->
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Admin/assetsl/js/jquery-2.1.0.js" ></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js" ></script>
