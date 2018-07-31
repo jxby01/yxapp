@@ -419,7 +419,7 @@
 	border: 1px solid #CCCCCC;
 	background-color: #FFF;
 	overflow: hidden;
-	margin:20px 0 0 50px;
+	/*margin:20px 0 0 50px;*/
 	padding: 0;
 }
 /* toolbar */

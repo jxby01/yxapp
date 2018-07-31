@@ -1,61 +1,123 @@
-
-
 <div class="content-page">
-			<!-- Start content -->
-			<div class="content">
-				<div class="am-g">
-					<!-- Row start -->
-						<div class="am-u-sm-12">
-							<div class="card-box">
-								<form action="{:U('Admin/Base/tianjiajid')}" method="post" enctype="multipart/form-data">
-									<input type="hidden" name="vi" id="vi" value="{$vi}"/>
-									<input type="hidden" name="id" id="id" value="{$ba.base_id}"/>
-								    <legend>基地添加</legend>
-								    <div class="am-form-group">
-								      <label for="doc-vld-name-2">标题：</label>
-								      <input style="width:100%;height:40px;padding-left: 1em;" value="{$ba.title}" type="text" class="sptitle" name="title"  placeholder="输入基地名称"/>
-								    </div>
-								    
-								   <div class="layui-upload">
-
-                                                    <div class="layui-upload-list">
-                                                    	<if condition="$ba['img']!=''">
-                                                        <img style="width: 84px;height: 84px;margin-bottom: 12px;" class="layui-upload-img" src="__ROOT__/{$ba.img}" id="demo1">
-                                                        <else/>
-                                                        <img style="width: 84px;height: 84px;margin-bottom: 12px;" class="layui-upload-img" src="" id="demo1">
-                                                        </if>
-                                                        <input type="hidden" name="img" id="base_img" value="{$ba.img}" />
-                                                        <p></p>
-                                                        <button style="font-size: 12px;height: 30px;line-height: 30px;" type="button" class="layui-btn" id="test1">选择图片</button>
-                                                    </div>
-                                                </div>
-                                    <div class="am-form-group">
-								      <label for="doc-select-1">基地分类</label>
-								      <select id="doc-select-1" name="base_cloumn_id" style="width:100%;border-color: rgb(169, 169, 169);" required>
-								        <option value="">-=请选择一项=-</option>
-								        <foreach name="base" item="v">
-								        	<option value="{$v.base_cloumn_id}" <?php echo $ba['base_cloumn_id']== $v['base_cloumn_id']?selected:''; ?> >{$v.name}</option>
-								        </foreach>
-								      </select>
-								      <span class="am-form-caret"></span>
-								    </div>
-								    <div class="am-form-group">
-								      <label for="doc-vld-email-2">基地介绍：</label>
-								      <textarea style="width:100%;height:100px;" class="spmiaoshu" name="content" placeholder="输入基地描述">{$ba.content}</textarea>
-								    </div>
-								    
-								    <button class="am-btn am-btn-secondary tijiao" type="submit">提交</button>
-								</form>
-								
-							</div>
-						</div>
-					<!-- Row end -->
-				</div>
+	<div class="content">
+		<div class="am-u-md-6">
+			<div class="card-box">
+				<if condition="$bi==1">
+					<h4 class="header-title m-t-0 m-b-30">添加线路</h4>
+				<else/>
+					<h4 class="header-title m-t-0 m-b-30">修改线路</h4>
+				</if>
+				<h4 class="header-title m-t-0 m-b-30"></h4>
+				<form class="am-form" action="{:U('Admin/Line/addline')}" method="post" enctype="multipart/form-data">
+					<div class="am-form-group">
+				      	<label for="doc-ipt-email-2">线路名称：</label>
+				      	<input type="text" name="name" value="{$news.name}"  class="am-radius" style="width:50%;display: inline;" placeholder="请输入线路名称">
+				    </div>
+				    <div class="am-form-group">
+				      	<label for="doc-ipt-email-2" style="letter-spacing: 3.5px;">出发地：</label>
+				      	<input type="text" name="set_address" value="{$news.set_address}" class="am-radius" style="width:50%;display: inline;" placeholder="请输入出发地">
+				    </div>
+				    <div class="am-form-group">
+				      	<label for="doc-ipt-email-2" style="letter-spacing: 3.5px;">目的地：</label>
+				      	<input type="text" name="mud_address" value="{$news.mud_address}" class="am-radius" style="width:50%;display: inline;" placeholder="请输入目的地">
+				    </div>
+					<div class="am-form-group">
+					    <label for="doc-ipt-email-2">出发时间：</label>
+					    <input type="text" name="set_time" value="{$news.set_time}" id="test5" class="am-radius" style="width:50%;display: inline;" placeholder="请选择出发时间">
+				    </div>
+				    <div class="am-form-group">
+				      	<label for="doc-ipt-email-2">项目时间：</label>
+				      	<input type="text" name="this_time" value="{$news.this_time}" class="am-radius" style="width:50%;display: inline;" placeholder="请输入项目时间">
+				    </div>
+				    <div class="am-form-group">
+				    	<div class="am-g">
+				    		<label for="doc-ipt-email-2">线路主题：</label>
+						    <select id="doc-select-1" name="line_cloumn_id" style="width:50%;display: inline;">
+						        <option value="">-=请选择一项=-</option>
+						       	<foreach name="base" item="v">
+						        	<option value="{$v.id}" <?php echo $news['line_cloumn_id']== $v['id']?selected:''; ?> >{$v.title}</option>
+						        </foreach>
+						    </select>
+						    <span class="am-form-caret"></span>
+				    	</div>					      
+				    </div>
+				    <div class="am-form-group">
+				    	<div class="am-g">
+				    		<label for="doc-ipt-email-2" style="letter-spacing: 3.5px;">辅导员：</label>
+						    <select id="doc-select-1" name="resume_id" style="width:50%;display: inline;">
+						        <option value="">-=请选择一项=-</option>
+						       	<foreach name="user" item="v">
+						        	<option value="{$v.id}" <?php echo $news['resume_id']== $v['id']?selected:''; ?> >{$v.username}</option>
+						        </foreach>
+						    </select>
+						    <span class="am-form-caret"></span>
+				    	</div>					      
+				    </div>
+				    <div class="layui-upload">
+				    	<label for="doc-ipt-email-2">线路图：</label>
+                        <div class="layui-upload-list">
+                        	<if condition="$news['img']!=''">
+                            	<img style="width: 150px;height: 150px;margin-bottom: 12px;" class="layui-upload-img" src="__ROOT__/{$news.img}" id="demo1">
+                            <else/>
+                            	<img style="width: 150px;height: 150px;margin-bottom: 12px;" class="layui-upload-img" src="" id="demo1">
+                            </if>
+                            <p></p>
+                            <button style="font-size: 12px;height: 30px;line-height: 30px;" type="button" class="layui-btn" id="test1">选择图片</button>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+				      	<label for="doc-vld-ta-2">课程简介：</label>
+				      	<textarea name="courses_provide" id="doc-vld-ta-2" class="textarea"  style="width:100%;height:300px;">{$news.courses_provide}</textarea>
+				    </div>
+				    <div class="am-form-group">
+				      	<label for="doc-vld-ta-2">课程特色：</label>
+				      	<textarea name="courses_item" id="doc-vld-ta-2" class="textarea"  style="width:100%;height:300px;">{$news.courses_item}</textarea>
+				    </div>
+				    <div class="am-form-group">
+				      	<label for="doc-vld-ta-2">课程安排：</label>
+				      	<textarea name="courses_plan" id="doc-vld-ta-2" class="textarea" style="width:100%;height:300px;">{$news.courses_plan}</textarea>
+				    </div>
+					<input type="hidden" name="id" id="" value="{$news.id}" />
+					<input type="hidden" value="{$vi}" name="vi">
+					<input type="hidden" value="{$news.img}" name="img" id="img">
+				    <button type="submit" class="am-btn am-btn-primary">提交</button>
+				</form>
+				<!--<hr/>
+            	<p>注：预定退订扣除所设置的百分比手续费。</p>-->
 			</div>
 		</div>
-		<script type="text/javascript" src="__PUBLIC__/Admin/assetsl/js/jquery-2.1.0.js" ></script>
+	</div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Admin/assetsl/js/jquery-2.1.0.js" ></script>
 <script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js" ></script>
+<script src="__PUBLIC__/Admin/kindeditor/kindeditor.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+	layui.use('laydate', function(){
+		var laydate = layui.laydate;
+		//日期时间选择器
+	  laydate.render({
+	    elem: '#test5'
+	    ,type: 'datetime'
+	  });
+	})
+	
+	KindEditor.ready(function(K) {
+        window.editor = K.create('.textarea',{
+            pasteType:1
+        });
+    });
+    function check(th){
+	    var regStrs = [
+	        ['^0(\\d+)$', '$1'], //禁止录入整数部分两位以上，但首位为0
+	        ['[^\\d\\.]+$', ''], //禁止录入任何非数字和点
+	        ['\\.(\\d?)\\.+', '.$1'], //禁止录入两个以上的点
+	        ['^(\\d+\\.\\d{2}).+', '$1'] //禁止录入小数点后两位以上
+	    ];
+	    for(i=0; i<regStrs.length; i++){
+	        var reg = new RegExp(regStrs[i][0]);
+	        th.value = th.value.replace(reg, regStrs[i][1]);
+	    }
+	}
     layui.use('upload', function(){
         var $ = layui.jquery,
             upload = layui.upload;
@@ -68,7 +130,6 @@
                 //预读本地文件示例，不支持ie8
                 obj.preview(function(index, file, result){
                     $('#demo1').attr('src', result); //图片链接（base64）
-                    //图片链接（base64）
                 });
             }
             ,done: function(res){
@@ -76,7 +137,7 @@
                 if(res.code > 0){
                     return layer.msg('上传失败');
                 }
-                $('#base_img').val(res.src);
+                $('#img').val(res.src);
                 //上传成功
             }
             ,error: function(){

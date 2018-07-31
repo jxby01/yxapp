@@ -8,18 +8,17 @@
 					<h4 class="header-title m-t-0 m-b-30">修改线路主题</h4>
 				</if>
 				<h4 class="header-title m-t-0 m-b-30"></h4>
-				<form class="am-form" action="{:U('Admin/Goods/addgoods')}" method="post" enctype="multipart/form-data">
+				<form class="am-form" action="{:U('Admin/Line/addzhuti')}" method="post" enctype="multipart/form-data">
 					<div class="am-form-group">
 				      	<label for="doc-ipt-email-2">主题名称：</label>
-				      	<input type="text" name="shangp_name" value="{$news.shangp_name}"  class="am-radius" style="width:50%;display: inline;" placeholder="请输入主题名称">
+				      	<input type="text" name="title" value="{$ba.title}"  class="am-radius" style="width:50%;display: inline;" placeholder="请输入主题名称">
 				    </div>
                     <div class="am-form-group">
 				      	<label for="doc-vld-ta-2">主题介绍：</label>
-				      	<textarea name="content" id="doc-vld-ta-2" class="textarea" placeholder="请输入主题介绍" style="width:100%;height:200px;">{$news.content}</textarea>
+				      	<textarea name="content" id="doc-vld-ta-2" class="textarea" placeholder="请输入主题介绍" style="width:100%;height:200px;">{$ba.content}</textarea>
 				    </div>
-					<input type="hidden" name="id" id="" value="{$news.id}" />
+					<input type="hidden" name="id" id="" value="{$ba.id}" />
 					<input type="hidden" value="{$bi}" name="bi">
-					<input type="hidden" value="{$news.img}" name="img" id="img">
 				    <button type="submit" class="am-btn am-btn-primary">提交</button>
 				</form>
 				<!--<hr/>

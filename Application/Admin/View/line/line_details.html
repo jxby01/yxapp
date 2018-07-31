@@ -13,20 +13,8 @@
 				              
 				            </div>
 				          </div>
-				        </div>	
-				        
-						<form action="{:U('Admin/Base/base_details')}" method="get" enctype="multipart/form-data">
-							
-					        <div class="am-u-sm-12 am-u-md-3" style="float: right;">
-					          <div class="am-input-group am-input-group-sm">
-					            <input name="name" type="text" placeholder="请输入分类标题" class="am-form-field">
-					          <span class="am-input-group-btn">
-					            <button class="am-btn am-btn-default" type="submit">搜索</button>
-					          </span>
-					          </div>
-					        </div>
-						
-						</form>
+				       </div>	
+
 				      </div>
 					  <!-- Row end -->
 					  
@@ -39,10 +27,8 @@
               <tr>
                 <th class="table-check"><input type="checkbox" id="all" name="all" onclick="checkAll()" /></th>
                 <th>ID</th>
-                <th>标题</th>
-                <th>图片</th>
-                <th>添加人</th>
-                <th>分类描述</th>
+                <th>主题标题</th>
+                <th>主题介绍</th>
                 <th>操作</th>
               </tr>
               </thead>
@@ -50,17 +36,19 @@
               
              	<foreach name="fenl" item="v">
 	              <tr>
-	                <td><input type="checkbox" name="checkname[]" value="{$v.base_cloumn_id}"/></td>
-	                <td>{$v.base_cloumn_id}</td>
-	                <td>{$v.name}</td>
-	                <td><img style="width:100px;height:100px;" src="__ROOT__/{$v.img}"/></td>
-	                <td>{$v.ad_name}</td>
-	                <td>{$v.describe}</td>
+	                <td><input type="checkbox" name="checkname[]" value="{$v.id}"/></td>
+	                <td>{$v.id}</td>
+	                <td>{$v.title}</td>
+	                <td style="width: 30%;height:100px;">
+                    	<div class="chaochu" style="width: 100%;height:100%;overflow:auto;">
+                    		{$v.content}
+                    	</div>
+                   </td>
 	                <td>
 	                  <div class="am-btn-toolbar">
 	                    <div class="am-btn-group am-btn-group-xs">
-	                      <div style="background-color: #fff;" class="am-btn am-btn-default am-btn-xs am-text-secondary"><a href="{:U('Admin/Base/add_basefenl?bi=2&id='.$v['base_cloumn_id'])}"><span class="am-icon-pencil-square-o"></span> 编辑</a></div>
-	                      <div style="background-color: #fff;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only shanc" data-id="{$v.base_cloumn_id}"><span class="am-icon-trash-o"></span> 删除</div>
+	                      <div style="background-color: #fff;" class="am-btn am-btn-default am-btn-xs am-text-secondary"><a href="{:U('Admin/Line/add_linedetails?bi=2&id='.$v['id'])}"><span class="am-icon-pencil-square-o"></span> 编辑</a></div>
+	                      <div style="background-color: #fff;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only shanc" data-id="{$v.id}"><span class="am-icon-trash-o"></span> 删除</div>
 	                    </div>
 	                  </div>
 	                </td>
@@ -87,11 +75,11 @@
 				<script type="text/javascript">
 					$('.shanc').click(function(){
 						var id = $(this).attr('data-id');
-						layer.confirm('是否删除该基地分类信息？', {
+						layer.confirm('是否删除该线路主题信息？', {
 						  btn: ['确定','取消'] //按钮
 						}, function(){
 							$.ajax({
-					            url:"{:U('Admin/Base/shancsp')}",
+					            url:"{:U('Admin/Line/shancsp')}",
 					            type:"post",
 					            data:{
 					            	id:id
@@ -136,13 +124,13 @@
 						} 
 						str = str.substring(0, str.length - 1);
 						if(str==''){
-							layer.msg('请选择要删除的基地分类！');
+							layer.msg('请选择要删除的线路主题！');
 						}else{
-							layer.confirm('是否删除选中基地分类信息？', {
+							layer.confirm('是否删除选中线路主题信息？', {
 							  btn: ['确定','取消'] //按钮
 							}, function(){
 								$.ajax({
-						            url:"{:U('Admin/Base/plshanc')}",
+						            url:"{:U('Admin/Line/plshanc')}",
 						            type:"post",
 						            data:{
 						            	id:str
