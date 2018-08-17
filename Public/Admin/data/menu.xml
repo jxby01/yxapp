@@ -133,15 +133,70 @@
 			<link><![CDATA[Remind/remind_list]]></link>
 		</controller>
 		<controller>
-			<name id="25">发布通知</name>
+			<name id="26">发布通知</name>
 			<en>list</en>
 			<link><![CDATA[Remind/remind_add]]></link>
 		</controller>
 	</module>
-
-
-
-
+	<module>
+		<name id="27">用户管理</name>
+		<en>notice</en>
+		<target>collapse-nav27</target>
+		<icon>am-icon-database</icon>
+		<controller>
+			<name id="28">用户列表</name>
+			<en>list</en>
+			<link><![CDATA[User/user_list]]></link>
+		</controller>
+		<controller>
+			<name id="29">审核用户</name>
+			<en>list</en>
+			<link><![CDATA[User/examine_list]]></link>
+		</controller>
+	</module>
+	<module>
+		<name id="30">课程管理</name>
+		<en>notice</en>
+		<target>collapse-nav30</target>
+		<icon>am-icon-database</icon>
+		<controller>
+			<name id="31">课程列表</name>
+			<en>list</en>
+			<link><![CDATA[Course/course_list]]></link>
+		</controller>
+		<controller>
+			<name id="32">主题分类</name>
+			<en>list</en>
+			<link><![CDATA[CourseCloumn/cloumn_list]]></link>
+		</controller>
+		<controller>
+			<name id="36">标签管理</name>
+			<en>list</en>
+			<link><![CDATA[Label/label_list]]></link>
+		</controller>
+	</module>
+	<module>
+		<name id="33">banner管理</name>
+		<en>notice</en>
+		<target>collapse-nav33</target>
+		<icon>am-icon-database</icon>
+		<controller>
+			<name id="34">banner管理</name>
+			<en>list</en>
+			<link><![CDATA[Banner/banner_list]]></link>
+		</controller>
+	</module>
+	<module>
+		<name id="34">学校管理</name>
+		<en>notice</en>
+		<target>collapse-nav34</target>
+		<icon>am-icon-database</icon>
+		<controller>
+			<name id="35">学校列表</name>
+			<en>list</en>
+			<link><![CDATA[School/School_list]]></link>
+		</controller>
+	</module>
 
 
 

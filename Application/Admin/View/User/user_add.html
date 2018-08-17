@@ -1,0 +1,145 @@
+
+		
+	<!--	<div class="am-g">-->
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<div class="content-page">
+			<!-- Start content -->
+			<div class="content">
+				<div class="am-g">
+					<!-- Row start -->
+						<div class="am-u-sm-12">
+							<div class="card-box">
+								
+								<h4 class="header-title m-t-0 m-b-30">添加用户</h4>
+								
+								<div class="am-g">
+									<div class="am-u-md-6">
+										<form class="am-form am-text-sm" action="{:U('UserLogic/add')}" method="post"  enctype="multipart/form-data">
+											<div class="am-form-group">
+												<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">用户名</label>
+											      <input class="am-u-md-10 form-control" name="username" placeholder="输入用户名">
+										      </div>
+										    </div>
+										    <div class="am-form-group">
+												<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">手机号</label>
+											      <input class="am-u-md-10 form-control" maxlength="11" onblur="var re=/^(13[0-9]{9})|(15[0-9]{9})|(17[0-9]{9})|(18[0-9]{9})$/;   if(!re.test(this.value)){ alert('请输入正确的手机号码。');      return false;   }" name="tel" placeholder="输入登录手机号">
+										      </div>
+										    </div>
+										    <div class="am-form-group">
+												<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">密码</label>
+											      <input class="am-u-md-10 form-control" maxlength="16" name="password" placeholder="输入登录密码">
+										      </div>
+										    </div>
+										    <div class="am-form-group">
+										    	<div class="am-g">
+										    		<label class="am-u-md-2 am-md-text-right">选择角色</label>
+												      <div class="am-u-md-10 am-padding-0">
+												      <select name="role" onchange="if(this.value==1||this.value==2||this.value==3||this.value==5){document.getElementById('school').style.display='block';document.getElementById('grade').style.display='block';document.getElementById('ban').style.display='block';}else{document.getElementById('school').style.display='none';document.getElementById('grade').style.display='none';document.getElementById('ban').style.display='none';}">
+												        <option value="1">校长</option>
+												        <option value="2">主任</option>
+												        <option value="3">老师</option>
+												        <option value="4">辅导员</option>
+												        <option value="5">学生</option>
+												        <option value="6">专家</option>
+												        <option value="0">游客</option>
+												      </select>
+												      </div>
+												      <span class="am-form-caret"></span>
+										    	</div>
+										    </div>
+										    <div class="am-form-group" id="school">
+										    	<div class="am-g">
+										    		<label class="am-u-md-2 am-md-text-right">选择学校</label>
+												       <div class="am-u-md-10 am-padding-0">
+												      <select name="school">
+												       <foreach name="school" item="val">
+												        <option value="{$val['name']}">{$val['name']}</option>
+												       </foreach>
+												      </select>
+												      </div>
+												      <span class="am-form-caret"></span>
+										    	</div>
+										    </div>
+										    <div class="am-form-group" id="grade">
+												<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">年级</label>
+											      <input class="am-u-md-10 form-control" name="grade" placeholder="输入所属年级">
+										      </div>
+										    </div>
+										    <div class="am-form-group" id="ban">
+												<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">班级</label>
+											      <input class="am-u-md-10 form-control" name="ban" placeholder="输入所属班级">
+										      </div>
+										    </div>
+										    <div class="am-form-group">
+												<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">年龄</label>
+											      <input class="am-u-md-10 form-control" name="age" placeholder="年龄">
+										      </div>
+										    </div>
+										    <div class="am-form-group">
+										    	<div class="am-g">
+										    		<label class="am-u-md-2 am-md-text-right">性别</label>
+												       <div class="am-u-md-10 am-padding-0">
+												      <select name="sex">
+												        <option value="1">男</option>
+												        <option value="2">女</option>
+												      </select>
+												      </div>
+												      <span class="am-form-caret"></span>
+										    	</div>
+										    </div>
+										    
+											<button type="submit" class="am-btn am-btn-primary">确定</button>
+										</form>
+									</div>
+									
+									
+							</div>
+						</div>
+					<!-- Row end -->
+				</div>
+			
+			
+			
+				<!-- col end -->
+				
+				
+			<!-- row end -->
+			
+			
+			
+				<!-- col end -->
+				
+				
+				<!-- col end -->
+			</div>
+			<!-- row end -->
+			
+			</div>
+		</div>
+		<!-- end right Content here -->
+		<!--</div>-->
+		</div>
+		</div>
+		
+		<!-- navbar -->
+		<a href="admin-offcanvas" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"><!--<i class="fa fa-bars" aria-hidden="true"></i>--></a>
+		
+		<script type="text/javascript" src="../assets/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="../assets/js/amazeui.min.js"></script>
+		<script type="text/javascript" src="../assets/js/app.js" ></script>
+		<script type="text/javascript" src="../assets/js/blockUI.js" ></script>
+		<script charset="utf-8" src="__PUBLIC__/Admin/kindeditor/kindeditor-all.js"></script>
+		<script charset="utf-8" src="__PUBLIC__/Admin/kindeditor/lang/zh-CN.js"></script>
+		<script>
+	        
+		</script>
+	</body>
+	
+</html>
