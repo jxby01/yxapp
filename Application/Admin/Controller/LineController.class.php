@@ -4,126 +4,124 @@ use Think\Controller;
 class LineController extends CommonController {
 	//线路列表
     public function line(){
-    	I('name')?$condition['name'] = array('like','%'.I('name').'%'):false;
-    	I('set_time')?$condition['set_time'] = strtotime(I('set_time')):false;
-    	I('resume_id')?$condition['resume_id'] = I('resume_id'):false;
-    	I('line_cloumn_id')?$condition['line_cloumn_id'] = I('line_cloumn_id'):false;
-    	$p=I('p') ? I('p'):1;
-		$line = M('line')->where($condition)->page($p,'5')->order('id desc')->select();
-		foreach($line as $k=>$v){
-			$line[$k]['set_time'] = date('Y-m-d H:i:s',$v['set_time']);
-			$resume_id['id'] = $v['resume_id'];
-			$line[$k]['resume_id'] = M('user')->where($resume_id)->getField('username');
-			$line_cloumn_id['id'] = $v['line_cloumn_id'];
-			$line[$k]['title'] = M('line_cloumn')->where($line_cloumn_id)->getField('title');
-		}
-		$num = M('line')->where($condition)->order('id desc')->count();
-    	$Page       = new \Think\Page($num,5);// 实例化分页类 传入总记录数和每页显示的记录数
-    	//保持搜索条件分页
-    	$Page->parameter   =   array("name"=>I('name'),"set_time"=>strtotime(I('set_time')),"resume_id"=>I('resume_id'),"line_cloumn_id"=>I('line_cloumn_id'));
-    	
-    	$show       = $Page->show();// 分页显示输出
-    	$ba = M('line_cloumn')->select();
-		$user = M('user')->where("role=4")->select();
-		$this->assign('base',$ba);
-		$this->assign('user',$user);
-    	
-    	$this->assign('page',$show);
+    	$row=M('line')->select();
+    	foreach ($row as $key => $value) {
+    		$director=M('user')->find($value['user_id']);
+    		$row[$key]['director']=$director['username'];
+    		$guide=M('user')->find($value['guide']);
+    		$row[$key]['guide']=$guide['username'];
+    		$curriculum=M('curriculum')->find($value['curriculum_id']);
+    		$row[$key]['curriculum']=$curriculum['name'];
+    	}
+    	$school = M('school')->select();
+    	$curriculum=M('curriculum')->select();
+    	$guide = M('user')->where(array('role'=>'4','state'=>1))->select();
+    	$num=count($row);
+    	$this->assign('school',$school);
+    	$this->assign('guide',$guide);
+    	$this->assign('curriculum',$curriculum);
+    	$this->assign('row',$row);
     	$this->assign('num',$num);
-		$this->assign('line',$line);
 		$this->view();
 	}
-	//线路主题列表
-	public function line_details(){
-		$p=I('p') ? I('p'):1;
-		$fenl = M('line_cloumn')->page($p,'5')->order('id desc')->select();
-		$num = M('line_cloumn')->order('id desc')->count();
-    	$Page       = new \Think\Page($num,5);// 实例化分页类 传入总记录数和每页显示的记录数
-		
-    	$show       = $Page->show();// 分页显示输出
-    	$this->assign('page',$show);
+	/**
+	 * [screen description]
+	 * @return [type] [description]
+	 * 筛选
+	 */
+	public function screen(){
+		if($_POST['star_time']){
+			$where['star_time']=$_POST['star_time'];
+		}
+		if($_POST['guide']){
+			$where['guide']=$_POST['guide'];
+		}
+		if($_POST['grade']){
+			$where['grade']=$_POST['grade'];
+		}
+		if($_POST['school']){
+			$where['school']=$_POST['school'];
+		}
+		if($_POST['curriculum_id']){
+			$where['curriculum_id']=$_POST['curriculum_id'];
+		}
+		$row=M('line')->where($where)->select();
+		foreach ($row as $key => $value) {
+    		$director=M('user')->find($value['user_id']);
+    		$row[$key]['director']=$director['username'];
+    		$guide=M('user')->find($value['guide']);
+    		$row[$key]['guide']=$guide['username'];
+    		$curriculum=M('curriculum')->find($value['curriculum_id']);
+    		$row[$key]['curriculum']=$curriculum['name'];
+    	}
+    	$school = M('school')->select();
+    	$curriculum=M('curriculum')->select();
+    	$guide = M('user')->where(array('role'=>'4','state'=>1))->select();
+    	$num=count($row);
+    	$this->assign('school',$school);
+    	$this->assign('guide',$guide);
+    	$this->assign('curriculum',$curriculum);
     	$this->assign('num',$num);
-		$this->assign('fenl',$fenl);
-	    $this->view();
+    	$this->assign('row',$row);
+		$this->view('line');
+	}
+	/**
+	 * [search description]
+	 * @return [type] [description]
+	 * 搜索
+	 */
+	public function search(){
+		if(!$_POST['content']){
+			alert('请输入搜索线路名称',2000,2);exit;
+		}
+		$row=M('line')->where("name title like '%".$_POST['content']."%'")->select();
+		foreach ($row as $key => $value) {
+    		$director=M('user')->find($value['user_id']);
+    		$row[$key]['director']=$director['username'];
+    		$guide=M('user')->find($value['guide']);
+    		$row[$key]['guide']=$guide['username'];
+    		$curriculum=M('curriculum')->find($value['curriculum_id']);
+    		$row[$key]['curriculum']=$curriculum['name'];
+    	}
+    	$school = M('school')->select();
+    	$curriculum=M('curriculum')->select();
+    	$guide = M('user')->where(array('role'=>'4','state'=>1))->select();
+    	$num=count($row);
+    	$this->assign('school',$school);
+    	$this->assign('guide',$guide);
+    	$this->assign('curriculum',$curriculum);
+    	$this->assign('num',$num);
+    	$this->assign('row',$row);
+		$this->view('line');
 	}
 	//添加线路
 	public function add_line(){
-		$vi = I('vi');
-    	$id = I('id');
-    	if($vi==2){
-    		$news = M('line')->where("id=$id")->find();
-    		$news['set_time'] = date('Y-m-d H:i:s',$news['set_time']);
-    		$this->assign('news',$news);
-    	}
-		$ba = M('line_cloumn')->select();
-		$user = M('user')->where("role=4")->select();
-		$this->assign('base',$ba);
-		$this->assign('user',$user);
-		$this->assign('vi',$vi);
+		$curriculum=M('curriculum')->select();
+		$guide = M('user')->where(array('role'=>'4','state'=>1))->select();
+		$school = M('school')->select();
+		$this->assign('school',$school);
+		$this->assign('guide',$guide);
+		$this->assign('curriculum',$curriculum);
        	$this->view();
 	}
-	//添加线路主题
-	public function add_linedetails(){
-		$bi = I('bi');
-		if($bi==2){
-			$id['id'] = I('id');
-			$ba = M('line_cloumn')->where($id)->find();
-			$this->assign('ba',$ba);
-		}
-		$this->assign('bi',$bi);
-	    $this->view();
+	/**
+	 * [update_line description]
+	 * @return [type] [description]
+	 * 修改路线
+	 */
+	public function update_line(){
+		$row=M('line')->find($_GET['id']);
+		$curriculum=M('curriculum')->select();
+		$guide = M('user')->where(array('role'=>'4','state'=>1))->select();
+		$school = M('school')->select();
+		$this->assign('school',$school);
+		$this->assign('guide',$guide);
+		$this->assign('curriculum',$curriculum);
+		$this->assign('row',$row);
+		$this->view();
 	}
-	public function addzhuti(){
-		$bi = I('bi');
-		$data['title'] = I('title');
-		$data['content'] = I('content');
-		if($bi==1){
-			if($data['title']==''){
-				$this->error('添加失败,请填写主题名称！');
-			}else if($data['content']==''){
-				$this->error('添加失败,请填写主题介绍！');
-			}else{
-				M('line_cloumn')->add($data);
-		    	$this->success('添加成功', '/Admin/line/line_details');
-			}
-		}else{
-			$bid['id'] = I('id');
-			if($data['title']==''){
-				$this->error('修改失败,请填写主题名称！');
-			}else if($data['content']==''){
-				$this->error('修改失败,请填写主题介绍！');
-			}else{
-				M('line_cloumn')->where($bid)->save($data);
-		    	$this->success('修改成功', '/Admin/line/line_details');
-			}
-		}
-	}
-	//线路主题删除
-	public function shancsp(){
-		$data['id'] = I('id');
-		$vo = M('line_cloumn')->where($data)->delete();
-		if($vo){
-			$this->ajaxReturn(1);
-		}else{
-			$this->ajaxReturn(2);
-		}
-	}
-	
-	//批量删除线路主题
-    public function plshanc(){
-    	$id = explode(',',I('id')); 
-		foreach($id as $v){
-			$vid['id'] = $v;
-			$vi = M('line_cloumn')->where($vid)->delete();
-		}
-		if($vi){
-			$this->ajaxReturn(1);
-		}else{
-			$this->ajaxReturn(2);
-		}
-    }
-    //线路删除
-	public function shanxianlu(){
+	//线路删除
+	public function del(){
 		$data['id'] = I('id');
 		$vo = M('line')->where($data)->delete();
 		if($vo){
@@ -133,86 +131,102 @@ class LineController extends CommonController {
 		}
 	}
 	//批量删除线路
-	public function plshancxianlu(){
-		$id = explode(',',I('id')); 
-		foreach($id as $v){
-			$vid['id'] = $v;
-			$vi = M('line')->where($vid)->delete();
-		}
+    public function all_del(){
+    	$id = explode(',',I('id'));
+    	$whe['id']=array('in',$id);
+		$vi = M('line')->where($whe)->delete();
 		if($vi){
 			$this->ajaxReturn(1);
 		}else{
 			$this->ajaxReturn(2);
 		}
-	}
+    }
+    //生成添加线路
     public function addline(){
-    	$vi = I('vi');
-		$data['name'] = I('name');
-		$data['set_address'] = I('set_address');
-		$data['mud_address'] = I('mud_address');
-		$data['set_time'] = strtotime(I('set_time'));
-		$data['this_time'] = I('this_time');
-		$data['line_cloumn_id'] = I('line_cloumn_id');
-		$data['resume_id'] = I('resume_id');
-		$data['img'] = I('img');
-		$data['courses_provide'] = $_POST['courses_provide'];
-		$data['courses_item'] = $_POST['courses_item'];
-		$data['courses_plan'] = $_POST['courses_plan'];
-		if($vi==1){
-			if($data['name']==''){
-				$this->error('添加失败,请输入线路名称！');
-			}else if($data['set_address']==''){
-				$this->error('添加失败,请输入出发地！');
-			}else if($data['mud_address']==''){
-				$this->error('添加失败,请输入目的地！');
-			}else if($data['set_time']==''){
-				$this->error('添加失败,请选择出发时间！');
-			}else if($data['this_time']==''){
-				$this->error('添加失败,请输入项目时间！');
-			}else if($data['line_cloumn_id']==''){
-				$this->error('添加失败,请选择线路主题！');
-			}else if($data['resume_id']==''){
-				$this->error('添加失败,请选择辅导员！');
-			}else if($data['img']==''){
-				$this->error('添加失败,请上传线路图！');
-			}else if($data['courses_provide']==''){
-				$this->error('添加失败,请填写课程简介！');
-			}else if($data['courses_item']==''){
-				$this->error('添加失败,请填写课程特色！');
-			}else if($data['courses_plan']==''){
-				$this->error('添加失败,请填写课程安排！');
-			}else{
-				M('line')->add($data);
-		    	$this->success('添加成功', '/Admin/line/line');
-			}
-		}else{
-			$bid['id'] = I('id');
-			if($data['name']==''){
-				$this->error('添加失败,请输入线路名称！');
-			}else if($data['set_address']==''){
-				$this->error('添加失败,请输入出发地！');
-			}else if($data['mud_address']==''){
-				$this->error('添加失败,请输入目的地！');
-			}else if($data['set_time']==''){
-				$this->error('添加失败,请选择出发时间！');
-			}else if($data['this_time']==''){
-				$this->error('添加失败,请输入项目时间！');
-			}else if($data['line_cloumn_id']==''){
-				$this->error('添加失败,请选择线路主题！');
-			}else if($data['resume_id']==''){
-				$this->error('添加失败,请选择辅导员！');
-			}else if($data['img']==''){
-				$this->error('添加失败,请上传线路图！');
-			}else if($data['courses_provide']==''){
-				$this->error('添加失败,请填写课程简介！');
-			}else if($data['courses_item']==''){
-				$this->error('添加失败,请填写课程特色！');
-			}else if($data['courses_plan']==''){
-				$this->error('添加失败,请填写课程安排！');
-			}else{
-				M('line')->where($bid)->save($data);
-		    	$this->success('修改成功', '/Admin/line/line');
-			}
-		}
+    	$_POST['add_time']=time();
+    	if(!$_POST['name']){
+    		alert('请输入线路名称','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['set_address']){
+    		alert('请输入出发地','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['address']){
+    		alert('请输入目的地','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['star_time']){
+    		alert('请输入出发时间','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['this_time']){
+    		alert('请输入项目时间','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['curriculum_id']){
+    		alert('请选择课程','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['tote']){
+    		alert('请输入路线团队人数','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['img']){
+    		alert('请选择路线图','3000',2);
+    		exit;
+    	}
+    	$rtn = M('line')->add($_POST);
+    	if($rtn){
+    		$this->success('生成路线成功',U('Line/line'));
+    	}else{
+    		alert('生成路线失败','3000',2);
+    	}
+    }
+    /**
+     * [up_date description]
+     * @return [type] [description]
+     * 修改
+     */
+    public function up_date(){
+    	$_POST['add_time']=time();
+    	if(!$_POST['name']){
+    		alert('请输入线路名称','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['set_address']){
+    		alert('请输入出发地','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['address']){
+    		alert('请输入目的地','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['star_time']){
+    		alert('请输入出发时间','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['this_time']){
+    		alert('请输入项目时间','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['curriculum_id']){
+    		alert('请选择课程','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['tote']){
+    		alert('请输入路线团队人数','3000',2);
+    		exit;
+    	}
+    	if(!$_POST['img']){
+    		alert('请选择路线图','3000',2);
+    		exit;
+    	}
+    	$rtn = M('line')->where(array('id'=>$_GET['id']))->save($_POST);
+    	if($rtn){
+    		$this->success('修改路线成功',U('Line/line'));
+    	}else{
+    		alert('修改路线失败','3000',2);
+    	}
     }
 }

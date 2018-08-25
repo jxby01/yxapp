@@ -89,7 +89,7 @@ $(function(){
 
 function power_del(id){
 
-	if(id == 3){
+	if(id == 1){
 		alert('该操作系统不允许！！');return false;
 	}else{
         $.ajax({
@@ -97,8 +97,10 @@ function power_del(id){
             data:{id:id},
             url:'<?php echo U("Admin/Power/power_del");?>',
             success:function(data){
+                console.log(data)
                 if(data == 1){
                     alert('删除成功');
+                    window.location.reload();
                 }else{
                     alert('删除出错....');
                 }

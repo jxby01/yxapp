@@ -8,49 +8,77 @@
 				          <div class="am-btn-toolbar">
 				            <div class="am-btn-group am-btn-group-xs">
 				            	<legend>线路列表</legend>
-				              <button type="button" class="am-btn am-btn-default"><a href="{:U('Admin/Line/add_line?vi=1')}" style="color: #000;"><span class="am-icon-plus"></span> 新增</a></button>
+				              <button type="button" class="am-btn am-btn-default"><a href="{:U('Admin/Line/add_line')}" style="color: #000;"><span class="am-icon-plus"></span> 新增</a></button>
 				              <button type="button" class="am-btn am-btn-default plshanc"><span class="am-icon-trash-o"></span> 批量删除</button>
 				              
 				            </div>
 				          </div>
 				        </div>	
 				        
-						<form action="{:U('Admin/Line/line')}" method="get" enctype="multipart/form-data">
-							
+						<form action="{:U('Admin/Line/search')}" method="post" enctype="multipart/form-data">
 					        <div class="am-u-sm-12 am-u-md-2" style="float: right;">
 					          <div class="am-input-group am-input-group-sm">
-					            <input name="name" type="text" placeholder="请输入线路名称" class="am-form-field">
+					            <input name="content" type="text" placeholder="请输入线路名称" class="am-form-field">
 					          <span class="am-input-group-btn">
 					            <button class="am-btn am-btn-default" type="submit">搜索</button>
 					          </span>
 					          </div>
 					        </div>
-					        
-					        <div class="am-u-sm-12 am-u-md-1" style="float: right;padding: 0;margin-left: 1em;">
+						</form>
+						<form action="{:U('Admin/Line/screen')}" method="post" enctype="multipart/form-data">
+							<span class="am-input-group-btn" style="float: right;margin-right: 60px;">
+								<button class="am-btn am-btn-default" type="submit">筛选</button>
+							</span>
+							<div class="am-u-sm-12 am-u-md-1" style="float: right;padding: 0;margin-left: 1em;">
 					          <div class="am-input-group am-input-group-sm">
-					            <input name="set_time" type="text" id="test5" placeholder="出发时间" class="am-form-field">
+					            <input name="star_time" type="text" id="test5" placeholder="出发时间" class="am-form-field">
 					          </div>
 					        </div>
 					        <div class="am-u-sm-12 am-u-md-1" style="float: right;margin-right: 1em;">
 								<div class="am-input-group am-input-group-sm">
-						          	<select name="resume_id" style="height:33px;">
+						          	<select name="guide" style="height:33px;">
 								    	<option value="">-=请选择辅导员=-</option>
-								    	<foreach name="user" item="v">
+								    	<foreach name="guide" item="v">
 								        	<option value="{$v.id}">{$v.username}</option>
 								        </foreach>
 									</select>
 						        </div>
 							</div>
-							<div class="am-u-sm-12 am-u-md-1" style="float: right;">
+							<div class="am-u-sm-12 am-u-md-1" style="float: right;margin-right: 1em;">
 								<div class="am-input-group am-input-group-sm">
-						          	<select name="line_cloumn_id" style="height:33px;">
-								    	<option value="">-=请选择主题=-</option>
-								    	<foreach name="base" item="v">
-								        	<option value="{$v.id}">{$v.title}</option>
+						          	<select style="height:33px;" name="grade">
+								        <option value="">-=请选择年级=-</option>
+								        <option value="一年级">一年级</option>
+								        <option value="二年级">二年级</option>
+								        <option value="三年级">三年级</option>
+								        <option value="四年级">四年级</option>
+								        <option value="五年级">五年级</option>
+								        <option value="六年级">六年级</option>
+								    </select>
+						        </div>
+							</div>
+							<div class="am-u-sm-12 am-u-md-1" style="float: right;margin-right: 1em;">
+								<div class="am-input-group am-input-group-sm">
+						          	<select name="school" style="height:33px;">
+								    	<option value="">-=请选择学校=-</option>
+								    	<foreach name="school" item="v">
+								        	<option value="{$v.name}">{$v.name}</option>
 								        </foreach>
 									</select>
 						        </div>
 							</div>
+
+							<div class="am-u-sm-12 am-u-md-1" style="float: right;">
+								<div class="am-input-group am-input-group-sm">
+						          	<select name="curriculum_id" style="height:33px;">
+								    	<option value="">-=请选择课程=-</option>
+								    	<foreach name="curriculum" item="v">
+								        	<option value="{$v.id}">{$v.name}</option>
+								        </foreach>
+									</select>
+						        </div>
+							</div>
+
 						</form>
 				      </div>
 					  <!-- Row end -->
@@ -69,29 +97,43 @@
                 <th>出发地</th>
                 <th>目的地</th>
                 <th>出发时间</th>
-                <th>线路主题</th>
+                <th>线路课程</th>
                 <th>项目时间</th>
+                <th>团队人数</th>
+                <th>已报名人数</th>
+                <th>学校</th>
+                <th>年级</th>
+                <th>班级</th>
+                <th>年级主任</th>
                 <th>辅导员</th>
+                <th>操作时间</th>
                 <th>操作</th>
               </tr>
               </thead>
               <tbody>
-             	<foreach name="line" item="v">
+             	<foreach name="row" item="v">
 	              <tr>
 	                <td><input type="checkbox" name="checkname[]" value="{$v.id}"/></td>
 	                <td>{$v.id}</td>
 	                <td><img style="width:100px;height:100px;" src="__ROOT__/{$v.img}"/></td>
 	                <td>{$v.name}</td>
 	                <td>{$v.set_address}</td>
-	                <td>{$v.mud_address}</td>
-	                <td>{$v.set_time}</td>
-	                <td>{$v.title}</td>
+	                <td>{$v.address}</td>
+	                <td>{$v.star_time}</td>
+	                <td>{$v.curriculum}</td>
 	                <td>{$v.this_time}</td>
-	                <td>{$v.resume_id}</td>
+	                <td>{$v.tote}</td>
+	                <td>{$v.number}</td>
+	                <td>{$v.school}</td>
+	                <td>{$v.grade}</td>
+	                <td>{$v.calss}</td>
+	                <td>{$v.director}</td>
+	                <td>{$v.guide}</td>
+	                <td><?php echo date('Y-m-d H:i:s',$v['add_time']);?></td>
 	                <td>
 	                  <div class="am-btn-toolbar">
 	                    <div class="am-btn-group am-btn-group-xs">
-	                      <div style="background-color: #fff;" class="am-btn am-btn-default am-btn-xs am-text-secondary"><a href="{:U('Admin/Line/add_line?vi=2&id='.$v['id'])}"><span class="am-icon-pencil-square-o"></span> 查看编辑</a></div>
+	                      <div style="background-color: #fff;" class="am-btn am-btn-default am-btn-xs am-text-secondary"><a href="{:U('Admin/Line/update_line')}?id={$v.id}"><span class="am-icon-pencil-square-o"></span> 查看编辑</a></div>
 	                      <div style="background-color: #fff;" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only shanc" data-id="{$v.id}"><span class="am-icon-trash-o"></span> 删除</div>
 	                    </div>
 	                  </div>
@@ -114,8 +156,9 @@
 					  <!-- Row end -->
 					  
 					</div>
-				<script type="text/javascript" src="__PUBLIC__/Admin/assetsl/js/jquery-2.1.0.js" ></script>
-				<script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js" ></script>
+				<script type="text/javascript" src="__PUBLIC__/Admin/assetsl/js/jquery-2.1.0.js"></script>
+				<script type='text/javascript' src='__PUBLIC__/Admin/assetsl/js/layer/layer.js'></script>
+				<script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js"></script>
 				<script type="text/javascript">
 					layui.use('laydate', function(){
 						var laydate = layui.laydate;
@@ -131,7 +174,7 @@
 						  btn: ['确定','取消'] //按钮
 						}, function(){
 							$.ajax({
-					            url:"{:U('Admin/Line/shanxianlu')}",
+					            url:"{:U('Admin/Line/del')}",
 					            type:"post",
 					            data:{
 					            	id:id
@@ -144,7 +187,7 @@
 					            			window.location.reload();
 					            		}
 					            	}else{
-					            		layer.msg('删除失败！', {icon: 1});
+					            		layer.msg('删除失败！', {icon: 2});
 					            	}
 					            },
 					       	});
@@ -182,7 +225,7 @@
 							  btn: ['确定','取消'] //按钮
 							}, function(){
 								$.ajax({
-						            url:"{:U('Admin/Line/plshancxianlu')}",
+						            url:"{:U('Admin/Line/all_del')}",
 						            type:"post",
 						            data:{
 						            	id:str
@@ -203,7 +246,6 @@
 							  
 							});
 						}
-						
 				    })
 				</script>
 				

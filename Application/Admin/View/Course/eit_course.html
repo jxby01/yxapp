@@ -10,9 +10,8 @@
 					<!-- Row start -->
 						<div class="am-u-sm-12">
 							<div class="card-box">
-								
-								<h4 class="header-title m-t-0 m-b-30">添加课程</h4>
-								
+								<h4 class="header-title m-t-0 m-b-30">修改课程</h4>
+								<!-- <?php //var_dump($row);?> -->
 								<div class="am-g">
 									<div class="am-u-md-6">
 										<div class="am-form-group">
@@ -24,19 +23,20 @@
 											<div class="am-form-group">
 												<div class="am-g">
 											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">课程名称</label>
-											      <input class="am-u-md-10 form-control kcname" name="title" id="title" placeholder="输入课程名称">
+											      <input class="am-u-md-10 form-control kcname" name="title" id="title" value="{$row['name']}">
 										      </div>
 										    </div>
 										    <div class="am-form-group">
 												<div class="am-g">
 											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">课程图片</label>
 											      <input class="am-u-md-10 form-control kcimg" type="file" name="img" accept="image/*" id="img" placeholder="选择上传图片">
-										      </div>
+										      	  <img src="__ROOT__/{$row['img']}" alt="" style="width: 100px;height: 100px;margin-left: 20%;">
+										      	</div>
 										    </div>
 										    <div class="am-form-group">
 												<div class="am-g">
 											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">课程地区</label>
-											      <input class="am-u-md-10 form-control" name="address" id="address" placeholder="输入所属地区">
+											      <input class="am-u-md-10 form-control" name="address" id="address" value="{$row['address']}">
 										      </div>
 										    </div>
 										    <div class="am-form-group">
@@ -45,7 +45,7 @@
 												      <div class="am-u-md-10 am-padding-0">
 												      <select name="line_cloumn_id" id="line_cloumn_id">
 												       <foreach name="cloumn" item="val">
-												        <option value="{$val['id']}">{$val['title']}</option>
+												        <option value="{$val['id']}" <?php if($row['line_cloumn_id']==$val['id']){echo 'selected="selected"';}?> >{$val['title']}</option>
 												       </foreach>
 												      </select>
 												      </div>
@@ -58,12 +58,12 @@
 										    		<div class="am-u-md-10 am-padding-0">
 												      <select onchange="get_label(this.value)" name="grade" id="grade">
 												        <option value="0">请选择年级</option>
-												        <option value="一年级">一年级</option>
-												        <option value="二年级">二年级</option>
-												        <option value="三年级">三年级</option>
-												        <option value="四年级">四年级</option>
-												        <option value="五年级">五年级</option>
-												        <option value="六年级">六年级</option>
+												        <option value="一年级" <?php if($row['grade']=='一年级'){echo 'selected="selected"';}?> >一年级</option>
+												        <option value="二年级" <?php if($row['grade']=='二年级'){echo 'selected="selected"';}?> >二年级</option>
+												        <option value="三年级" <?php if($row['grade']=='三年级'){echo 'selected="selected"';}?> >三年级</option>
+												        <option value="四年级" <?php if($row['grade']=='四年级'){echo 'selected="selected"';}?> >四年级</option>
+												        <option value="五年级" <?php if($row['grade']=='五年级'){echo 'selected="selected"';}?> >五年级</option>
+												        <option value="六年级" <?php if($row['grade']=='六年级'){echo 'selected="selected"';}?> >六年级</option>
 												      </select>
 												      </div>
 												      <span class="am-form-caret"></span>
@@ -72,20 +72,24 @@
 										    <div class="am-form-group">
 										    	<div class="am-g">
 										    		<label class="am-u-md-2 am-md-text-right" for="doc-select-1">选择标签</label>
-												      
-												      <span id="label"></span>
+												      <span id="label">
+												      	<foreach name="row['label']" item="val">
+													      <label><input type='checkbox' checked="checked" name='label[]' value="{$val[0]}">{$val[0]}</label>
+													      <input style='width:40px;margin-right: 8px;' name='ratio[]' value="{$val[1]}">
+													    </foreach>
+												      </span>
 										    	</div>
 										    </div>
 										    <div class="am-form-group">
 												<div class="am-g">
 											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">课程天数</label>
-											      <input class="am-u-md-10 form-control" name="day_time" id="day_time" placeholder="输入课程天数">
+											      <input class="am-u-md-10 form-control" name="day_time" id="day_time" value="{$row['day_time']}">
 										      </div>
 										    </div>
 										    <div class="am-form-group">
 												<div class="am-g">
 											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">适应年龄</label>
-											      <input class="am-u-md-10 form-control" name="age" id="age" placeholder="输入适应年龄">
+											      <input class="am-u-md-10 form-control" name="age" id="age" value="{$row['age']}">
 										      </div>
 										    </div>
 										    <div class="am-form-group">
@@ -94,7 +98,7 @@
 												      <div class="am-u-md-10 am-padding-0">
 												      <select name="user_id" id="user_id">
 												       <foreach name="expert" item="val">
-												        <option value="{$val['id']}">{$val['username']}</option>
+												        <option value="{$val['id']}" <?php if($row['user_id']==$val['id']){echo 'selected="selected"';}?> >{$val['username']}</option>
 												       </foreach>
 												      </select>
 												      </div>
@@ -106,11 +110,11 @@
 										    		<label class="am-u-md-2 am-md-text-right" for="doc-select-1">推荐星级</label>
 										    		<div class="am-u-md-10 am-padding-0">
 												      <select name="star" id="star">
-												        <option value="5">五颗星</option>
-												        <option value="4">四颗星</option>
-												        <option value="3">三颗星</option>
-												        <option value="2">二颗星</option>
-												        <option value="1">一颗星</option>
+												        <option value="5" <?php if($row['star']==5){echo 'selected="selected"';}?> >五颗星</option>
+												        <option value="4" <?php if($row['star']==4){echo 'selected="selected"';}?> >四颗星</option>
+												        <option value="3" <?php if($row['star']==3){echo 'selected="selected"';}?> >三颗星</option>
+												        <option value="2" <?php if($row['star']==2){echo 'selected="selected"';}?> >二颗星</option>
+												        <option value="1" <?php if($row['star']==1){echo 'selected="selected"';}?> >一颗星</option>
 												      </select>
 												      </div>
 												      <span class="am-form-caret"></span>
@@ -120,7 +124,7 @@
 										    	<div class="am-g">
 											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">课程简介</label>
 											      <div class="am-u-md-10 am-padding-0">
-											      <textarea name="courses_provide" id="courses_provide" placeholder="简介信息" class="am-u-md-10 form-control" style="min-height: 200px;min-width: 730px;" rows="5"></textarea>
+											      <textarea name="courses_provide" id="courses_provide" placeholder="简介信息" class="am-u-md-10 form-control" style="min-height: 200px;min-width: 730px;" rows="5">{$row['courses_provide']}</textarea>
 											      </div>
 										    	</div>
 										    </div>
@@ -128,7 +132,7 @@
 										    	<div class="am-g">
 											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">课程特色</label>
 											      <div class="am-u-md-10 am-padding-0">
-											      <textarea name="courses_item" placeholder="摘要信息" class="am-u-md-10 form-control textarea" style="min-height: 600px;min-width: 530px;" rows="5" id="courses_item"></textarea>
+											      <textarea name="courses_item" placeholder="摘要信息" class="am-u-md-10 form-control textarea" style="min-height: 600px;min-width: 530px;" rows="5" id="courses_item">{$row['courses_item']}</textarea>
 											      </div>
 										    	</div>
 										    </div>
@@ -137,8 +141,8 @@
 											<div class="am-form-group">
 										    	<div class="am-g">
 												    <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">banner设置</label>
-												    <div class="am-u-md-10 am-padding-0">
-												    	<input type="button" class="am-btn am-btn-primary" style="width:300px" value="再传一张" onclick="add()">
+												    <div class="am-u-md-10 am-padding-0" id="add_to">
+												    	<input type="button" class="am-btn am-btn-primary" style="width:300px" value="重新上传" onclick="add_to()">
 											    	</div>
 										    	</div>
 										    </div>
@@ -147,18 +151,24 @@
 												    <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1"></label>
 												    <div class="am-u-md-10 am-padding-0">
 												    	<div id="updtailes">
+												    		<!-- <foreach name="row['banner']" item="val">
 												    		<div>
-												    		<div onClick="document.getElementById('input1').click()">
+												    		<div onClick="document.getElementById('input{$key}').click()">
 																<button type="button" class="am-btn am-btn-primary" style="width:300px">选择文件</button>
-																<input type="file" style="display: none;" id="input1" onchange="yulan(this)" name="banner" multiple="multiple" accept="image/*">
+																<input type="file" style="display: none;" id="input{$key}" onchange="yulan(this)" name="banner" multiple="multiple" accept="image/*">
 															</div>
 															<button type="button" onclick="updel(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
 															</div>
+															</foreach> -->
 												    	</div>
 											    	</div>
 										    	</div>
 										    </div>
-										    <div id="yulandiv" style="width:500px;position: absolute;top: 0;right: -750px;"></div>
+										    <div id="yulandiv" style="width:500px;position: absolute;top: 0;right: -750px;">
+										    	<foreach name="row['banner']" item="val">
+										    	<img src="__ROOT__/{$val}" id="input{$key}img" style="width: 500px;">
+										    	</foreach>
+										    </div>
 										</form>
 										
 										<form action="" id="bt3" style="display: none;">
@@ -171,45 +181,49 @@
 										    	</div>
 										    </div>
 										     <div class="am-form-group" id="day">
+										     	<?php $i=1;?>
+										     	<foreach name="row['arrange']" item="val">
 										    	<div class="am-g">
 												    <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">
-												    <input type="text" class="form-control" name="set_day" style="width:50%;" value="L1"></label>
+												    <input type="text" class="form-control" name="set_day" style="width:50%;" value="{$key}"></label>
 												    <div class="am-u-md-10 am-padding-0">
 												    	<div style="line-height: 38px;">上午：<!-- <button type="button" class="am-btn am-btn-primary" style="width:260px" onClick="">增加上午安排</button> --><button style="height:38px;float: right;margin-right:54%;" type="button" onclick="day_del(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button></div>
-												    	<div id="am1">
+												    	<div id="am{$i}">
 													    	<div style="margin-top: 8px;margin-bottom: 1em;">
-													    		<input type="time" name="am_start_time" class="am-u-md-2 form-control" value="08:00">
+													    		<input type="time" name="am_start_time" class="am-u-md-2 form-control" value="<?php echo substr(array_keys($val['am'])[0],0,5);?>">
 													    		<span style="float: left;line-height: 38px;">--</span>
-													    		<input type="time" name="am_end_time" class="am-u-md-2 form-control" value="11:30">
+													    		<input type="time" name="am_end_time" class="am-u-md-2 form-control" value="<?php echo substr(array_keys($val['am'])[0],6,11);?>">
 													    		<!-- <button style="height:38px;float: left;margin-left:1em;" type="button" onclick="updel(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button> -->
 													    		<div style="clear:both;"></div>
-												    			<textarea name="am_cont" id="" style="width:300px;height:200px;margin-top:1em;"></textarea>
+												    			<textarea name="am_cont" id="" style="width:300px;height:200px;margin-top:1em;">{$val['am'][array_keys($val['am'])[0]]}</textarea>
 													    	</div>
 														</div>
 												    	<div style="line-height: 38px;">下午：<!-- <button type="button" class="am-btn am-btn-primary" style="width:260px">增加下午安排</button> --></div>
-												    	<div id="pm1">
+												    	<div id="pm{$i}">
 													    	<div style="margin-top: 8px;margin-bottom: 1em;">
-													    		<input type="time" name="pm_start_time" class="am-u-md-2 form-control" value="14:00">
+													    		<input type="time" name="pm_start_time" class="am-u-md-2 form-control" value="<?php echo substr(array_keys($val['pm'])[0],0,5);?>">
 													    		<span style="float: left;line-height: 38px;">--</span>
-													    		<input type="time" name="pm_end_time" class="am-u-md-2 form-control" value="17:00">
+													    		<input type="time" name="pm_end_time" class="am-u-md-2 form-control" value="<?php echo substr(array_keys($val['pm'])[0],6,11);?>">
 													    		<!-- <button style="height:38px;float: left;margin-left:1em;" type="button" onclick="updel(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button> -->
 													    		<div style="clear:both;"></div>
-												    			<textarea name="pm_cont" id="" style="width:300px;height:200px;margin-top:1em;"></textarea>
+												    			<textarea name="pm_cont" id="" style="width:300px;height:200px;margin-top:1em;">{$val['pm'][array_keys($val['pm'])[0]]}</textarea>
 													    	</div>
 												    	</div>
 												    	<div style="line-height: 38px;">晚上：<!-- <button type="button" class="am-btn am-btn-primary" style="width:260px">增加晚上安排</button> --></div>
-												    	<div id="em1">
+												    	<div id="em{$i}">
 													    	<div style="margin-top: 8px;margin-bottom: 1em;">
-													    		<input type="time" name="em_start_time" class="am-u-md-2 form-control" value="19:00">
+													    		<input type="time" name="em_start_time" class="am-u-md-2 form-control" value="<?php echo substr(array_keys($val['em'])[0],0,5);?>">
 													    		<span style="float: left;line-height: 38px;">--</span>
-													    		<input type="time" name="em_end_time" class="am-u-md-2 form-control" value="21:00">
+													    		<input type="time" name="em_end_time" class="am-u-md-2 form-control" value="<?php echo substr(array_keys($val['em'])[0],6,11);?>">
 													    		<!-- <button style="height:38px;float: left;margin-left:1em;" type="button" onclick="updel(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button> -->
 													    		<div style="clear:both;"></div>
-												    			<textarea name="em_cont" id="" style="width:300px;height:200px;margin-top:1em;"></textarea>
+												    			<textarea name="em_cont" id="" style="width:300px;height:200px;margin-top:1em;">{$val['em'][array_keys($val['em'])[0]]}</textarea>
 													    	</div>
 													    </div>
 											    	</div>
 										    	</div>
+										    	<?php $i++;?>
+										    	</foreach>
 										    </div>
 										</form>
 										<div  class="am-btn am-btn-primary" id="rtn-ajax">确定</div>
@@ -251,15 +265,27 @@
 		<script charset="utf-8" src="__PUBLIC__/Admin/kindeditor/kindeditor-all.js"></script>
 		<!-- <script charset="utf-8" src="__PUBLIC__/Admin/kindeditor/lang/zh-CN.js"></script> -->
 		<script>
-
-		layui.use('laydate', function(){
-		  var laydate = layui.laydate;
-		  //时间选择器
-		  laydate.render({
-		    elem: '.text-time'
-		    ,type: 'time'
-		  });
-		});
+			// $(function(){
+			// 	var grade = $("#grade").val();
+			// 	get_label(grade);
+			// })
+			/**
+			 * [add_to description]
+			 * 重新上传banner
+			 */
+			function add_to(){
+				console.log($("#add_to"))
+				$("#add_to").html('<input type="button" class="am-btn am-btn-primary" style="width:300px" value="再传一张" onclick="add()">');
+				$("#yulandiv").html('');
+			}
+			layui.use('laydate', function(){
+			  var laydate = layui.laydate;
+			  //时间选择器
+			  laydate.render({
+			    elem: '.text-time'
+			    ,type: 'time'
+			  });
+			});
 
 	        KindEditor.ready(function(K) {
                 window.editor = K.create('.textarea',{
@@ -318,7 +344,7 @@
 	        }
 	        /***/
 	        //增加图片上传框框
-			var inputid=2;
+			var inputid="<?php echo count($row['banner']);?>";
 			function add(){
 				var input="'input"+inputid+"'";
 				var html='<div><div onClick="document.getElementById('+input+').click()"><button type="button" class="am-btn am-btn-primary" style="width:300px">选择文件</button><input type="file" style="display: none;" id="input'+inputid+'" onchange="yulan(this)" name="banner" multiple="multiple" accept="image/*"></div><button type="button" onclick="updel(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button></div>';
@@ -374,7 +400,7 @@
 			 * @return {[type]} [description]
 			 * 添加新的一天安排
 			 */
-			var d=2;
+			var d="<?php echo $i;?>";
 			function to_data(){
 				var add_day = '<div class="am-g">'+
 				    '<label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">'+
@@ -464,9 +490,9 @@
 					return false;
 				}
 				var img = document.getElementById("img").files[0];
-				if(img.length<1){
-					layer.msg('选择课程图片', {icon: 2});
-					return false;
+				// console.log(img)
+				if(img){
+					formData.append("img", img);//课程缩略图
 				}
 			  	//var img = getObjectURL(file[0]) ; //获取图片的路径，该路径不是图片在本地的路径
 			  	var address = $('#address').val();
@@ -499,7 +525,6 @@
 					return false;
 				}
 				console.log(str);
-				console.log(JSON.stringify(str))
 			  	var day_time = $("#day_time").val();
 			  	if (!day_time) {
 			  		layer.msg('请输入课程天数', {icon: 2});
@@ -532,17 +557,16 @@
 			  	}
 			  	//banner设置
 			  	var banner_length = $('input[name="banner"]').length;
-			  	if(banner_length<1){
-			  		layer.msg('请增加banner', {icon: 2});
-					return false;
-			  	}
 				for(var i=0;i<banner_length;i++){
 					var banner = $('input[name="banner"]')[i].files[0]
-					formData.append("banner"+i, banner);//banner
-					if(!$('input[name="banner"]')[i].files[0]){
-				  		layer.msg('请上传完善banner', {icon: 2});
-						return false;
-				  	}
+					if(banner){
+						formData.append("banner"+i, banner);//banner
+					}
+					console.log(banner)
+					// if(!$('input[name="banner"]')[i].files[0]){
+				 //  		layer.msg('请上传完善banner', {icon: 2});
+					// 	return false;
+				 //  	}
 				}
 				// console.log(JSON.stringify(banner))
 			  	// 内容安排
@@ -623,20 +647,19 @@
 				formData.append("grade", grade);//课程年级
 				formData.append("line_cloumn_id", line_cloumn_id);//课程主题id
 				formData.append("address", address);//课程地区
-				formData.append("img", img);//课程缩略图
 				formData.append("name", title);//课程标题
 				formData.append("star", star);//课程标题
 				formData.append("label", JSON.stringify(str));//课程标签占比json
 			    $.ajax({
 					type: 'post',
-					url: '{:U("CourseLogic/add_course")}',
-					data: formData, 
+					url: '{:U("CourseLogic/eit_course")}?id=<?php echo $_GET["id"]?>',
+					data: formData,
 					cache: false,
 					contentType: false, 
 					processData: false, 
 					success: function(data){
 						console.log(data)
-						if(data=='添加成功'){
+						if(data=='修改成功'){
 							layer.msg(data,{icon:1});
 							setTimeout(shuax,1500); 
 							function shuax(){

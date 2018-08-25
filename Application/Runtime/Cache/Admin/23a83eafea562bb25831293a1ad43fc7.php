@@ -7,8 +7,6 @@
 		<script type="text/javascript" src="/Public/Admin/assetsl/js/amazeui.min.js"></script>
 		<script type="text/javascript" src="/Public/Admin/assetsl/js/app.js" ></script>
 		<script type="text/javascript" src="/Public/Admin/assetsl/js/blockUI.js" ></script>
-		<script type="text/javascript" src="/Public/Admin/assetsl/js/charts/echarts.min.js" ></script>
-		<script type="text/javascript" src="/Public/Admin/assetsl/js/charts/indexChart.js" ></script>
 
 	</body>
 	
