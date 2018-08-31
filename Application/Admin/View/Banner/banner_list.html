@@ -1,0 +1,335 @@
+
+		
+	<!--	<div class="am-g">-->
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<div class="content-page">
+			<!-- Start content -->
+			<div class="content">
+				<div class="card-box">
+					<!-- Row start -->
+					<div class="am-g">
+						<div class="am-u-sm-12 am-u-md-4">
+				          <div class="am-btn-toolbar">
+				            <div class="am-btn-group am-btn-group-xs">
+				              <!-- <button type="button" class="am-btn am-btn-default"><a href="{:U('News/news_add')}"><span class="am-icon-plus"></span> 新增</a></button> -->
+				              <button onclick="sort()" type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 排序</button>
+				              <!-- <button type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span> 审核</button> -->
+				              <!-- <button type="button" class="am-btn am-btn-default plshanc"><span class="am-icon-trash-o"></span> 删除</button> -->
+				            </div>
+				          </div>
+				        </div>	
+						<!-- <form action="{:U('NewsLogic/news_screen')}" method="post">
+							<div class="am-u-sm-12 am-u-md-3">
+								按 时间：<input type="date" name="start" value="<?php echo date('Y-m-d',time());?>" >--<input type="date" name="end" value="<?php echo date('Y-m-d',time());?>" >
+							</div>
+						    <div class="am-u-sm-6 am-u-md-2" style="float: left;">
+					          分类:
+						      <select name="news_cloumn_id">
+						      <option value="">选择分类</option>
+						       <foreach name="cloumn" item="val">
+						        <option value="{$val['news_cloumn_id']}">{$val['name']}</option>
+						       </foreach>
+						      </select>
+						       <button type="" class="am-btn am-btn-default" style="padding: 0;"> 筛选</button>
+					        </div>
+						</form>
+				        <form action="{:U('NewsLogic/news_search')}" method="post">
+							
+							<div class="am-u-sm-8 am-u-md-2">
+					          <div class="am-input-group am-input-group-sm">
+					            <input type="text" name="content" class="am-form-field">
+					          <span class="am-input-group-btn">
+					            <button class="am-btn am-btn-default" type="">搜索</button>
+					          </span>
+					          </div>
+					        </div>
+				        </form> -->
+				    </div>
+					  <!-- Row end -->
+					  
+					  <!-- Row start -->
+					  	<div class="am-g">
+        <div class="am-u-sm-12">
+          <form class="am-form">
+            <table class="am-table am-table-striped am-table-hover table-main">
+              <thead>
+              <tr>
+                <th class="table-check"><input type="checkbox" id="all" name="all" onclick="checkAll()" /></th>
+                <th class="table-id">ID</th>
+                <th class="table-title">图片</th>
+                <th class="table-type">权重排序</th>
+                <th class="table-type">跳转路径</th>
+                <th class="table-type">是否展示</th>
+                <th class="table-author am-hide-sm-only">操作者</th>
+                <th class="table-date am-hide-sm-only">修改日期</th>
+                <th class="table-set">操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <foreach name="row" item="val">
+                <tr>
+                  <td><input type="checkbox" name="checkname[]" value="{$val['id']}" /></td>
+                  <td>{$val['id']}</td>
+                  <td><img width="160" id="img{$val['id']}" src="__PUBLIC__/{$val['img']}" ></td>
+                  <td><input style="max-width: 60px;max-height: 26px;" value="{$val['sort']}" name="sort" data-id="{$val['id']}" type="number" width="" /></td>
+                  <td class="am-hide-sm-only"><input onblur="set_link('{$val.id}','{$val.link_to}',this.value)" style="max-width: 60%;" type="text" value="{$val['link_to']}"></td>
+                  <td class="am-hide-sm-only"><button onclick="see('{$val.id}','{$val.state}')" type="button" class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><?php if($val['state']){echo '已显示';}else{echo '未显示';}?></button></td>
+                  <td class="am-hide-sm-only">{$val['admin_name']}</td>
+                  <td class="am-hide-sm-only"><?php echo date('Y-m-d H:i:s',$val['start_time']);?></td>
+                  <td>
+                    <div class="am-btn-toolbar">
+                      <div class="am-btn-group am-btn-group-xs">
+                        <a href="javascript:;" class="am-btn am-btn-default am-btn-xs am-text-secondary edit" onclick="document.getElementById('{$val.id}').click()"><span class="am-icon-pencil-square-o"></span> 编辑图片</a>
+                        <input type="file" name="img" id="{$val['id']}" accept="image/jpeg,image/jpg,image/png" onchange="readAsDataURL(this,'{$val.id}')" style="display: none;" >
+                        <!-- <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 复制</button> -->
+                        <!-- <button type="button" data-id="{$val['id']}" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only shanc"><span class="am-icon-trash-o"></span> 删除</button> -->
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </foreach>
+              </tbody>
+            </table>
+            <div class="am-cf">
+              共 {$count} 条记录
+              <div class="am-fr">
+                {$page}
+              </div>
+            </div>
+            <hr />
+            <p>注：.....</p>
+          </form>
+        </div>
+
+      </div>
+					  <!-- Row end -->
+					  
+					</div>
+				
+				
+				
+				
+				</div>
+			
+
+		</div>
+		
+		
+		
+		</div>
+		<!-- end right Content here -->
+		<!--</div>-->
+		</div>
+		</div>
+		
+		<!-- navbar -->
+		<a href="admin-offcanvas" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"><!--<i class="fa fa-bars" aria-hidden="true"></i>--></a>
+		
+		<script type="text/javascript" src="../assets/js/jquery-2.1.0.js" ></script>
+		<script type="text/javascript" src="../assets/js/amazeui.min.js"></script>
+		<script type="text/javascript" src="../assets/js/app.js" ></script>
+		<script type="text/javascript" src="../assets/js/blockUI.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/Admin/assetsl/js/jquery-2.1.0.js" ></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/assetsl/js/layer/layer.js" ></script>
+    <script type="text/javascript">
+     //预览多图
+function readAsDataURL(that,id){
+  // console.log(that);
+  // console.log(id);
+    var file = document.getElementById(id).files[0];  
+    var path = getObjectURL(file);
+  $("#img"+id).attr("src", path); //将图片路径存入src中，显示出图片
+  var formData = new FormData(); 
+  formData.append("file", file);
+  formData.append("id", id);
+    $.ajax({
+    type: 'post',
+    url: '{:U("Banner/update")}',
+    data: formData, 
+    cache: false,
+    contentType: false, 
+    processData: false, 
+    success: function(data){
+      if(data==-1){
+        layer.msg('只支持jpg,jpeg,gif,png格式图片!',{icon:2,time:1000});
+      }else {
+        layer.msg('修改成功!',{icon:1,time:1000});
+      }
+    },
+    error:function(data) {
+      layer.msg('网络请求失败!',{icon:2,time:1000});
+      console.log(data.msg);
+    },
+  }); 
+
+};
+function getObjectURL(file) {
+  var url = null ;
+  if (window.createObjectURL!=undefined) { // basic
+    url = window.createObjectURL(file) ;
+  } else if (window.URL!=undefined) { // mozilla(firefox)
+    url = window.URL.createObjectURL(file) ;
+  } else if (window.webkitURL!=undefined) { // webkit or chrome
+    url = window.webkitURL.createObjectURL(file) ;
+  }
+  return url ;
+}
+     //修改跳转路径
+      function set_link(id,y_link,link_to){
+        if(y_link==link_to){
+          return false;
+        }
+        $.ajax({
+          url:"{:U('Banner/set_link')}",
+          type:"post",
+          data:{
+            id:id,
+            link_to:link_to
+          },
+          success:function(e){
+            console.log(e)
+            layer.msg('修改成功', {icon: 1});
+            setTimeout(shuax,1000);
+            function shuax(){
+              window.location.reload();
+            }
+          },
+        });
+      }
+      //设置权重
+      function sort(){
+        var winputs=document.getElementsByName('sort');
+        var data=new Object();
+        for(var i=0;i<winputs.length;i++){
+          var id=winputs[i].getAttribute("data-id");
+          var weight=winputs[i].value;
+          data[id] = weight;
+        }
+        // data=JSON.stringify(data);
+        // console.log(data);
+        $.ajax({
+          url:"{:U('Banner/sort')}",
+          type:"post",
+          data:{
+            data:data
+          },
+          success:function(e){
+            console.log(e)
+            layer.msg(e, {icon: 1});
+            setTimeout(shuax,1000);
+            function shuax(){
+              window.location.reload();
+            }
+          },
+        });
+      }
+      //显示和不显示
+      function see(id,state){
+        $.ajax({
+          url:"{:U('Banner/see')}",
+          type:"post",
+          data:{
+            id:id,
+            state,state
+          },
+          success:function(e){
+            console.log(e)
+            if(e>0){
+              layer.msg('修改成功！', {icon: 1});
+              setTimeout(shuax,1000);
+              function shuax(){
+                window.location.reload();
+              }
+            }else{
+              layer.msg('修改失败！', {icon: 1});
+            }
+          },
+        });
+      }
+      //单条删除
+      $('.shanc').click(function(){
+        var id = $(this).attr('data-id');
+        layer.confirm('是否删除该条新闻栏目信息？', {
+          btn: ['确定','取消'] //按钮
+        }, function(){
+          $.ajax({
+                  url:"{:U('NewsLogic/news_del')}",
+                  type:"post",
+                  data:{
+                    news_id:id
+                  },
+                  success:function(e){
+                    console.log(e)
+                    if(e>0){
+                      layer.msg('删除成功！', {icon: 1});
+                      setTimeout(shuax,1000);
+                      function shuax(){
+                        window.location.reload();
+                      }
+                    }else{
+                      layer.msg('删除失败！', {icon: 1});
+                    }
+                  },
+              });
+        }, function(){
+          
+        });
+      })
+      function checkAll() {
+        var all=document.getElementById('all');  
+        var one=document.getElementsByName('checkname[]');
+        if(all.checked==true){
+            for(var i=0;i<one.length;i++){  
+                one[i].checked=true;  
+            }  
+  
+        }else{  
+            for(var j=0;j<one.length;j++){  
+                one[j].checked=false;  
+            }  
+        }  
+      }
+      //批量删除
+      $('.plshanc').click(function(){
+      var obj=document.getElementsByName('checkname[]'); 
+      var str=''; 
+      for(var i=0; i<obj.length; i++){ 
+        if(obj[i].checked) str+=obj[i].value+',';
+      } 
+      str = str.substring(0, str.length - 1);
+      if(str==''){
+        layer.msg('请选择要删除的新闻栏目内容！');
+      }else{
+        layer.confirm('是否删除选中新闻栏目信息？', {
+          btn: ['确定','取消'] //按钮
+        }, function(){
+          $.ajax({
+                  url:"{:U('NewsLogic/news_alldel')}",
+                  type:"post",
+                  data:{
+                    id:str
+                  },
+                  success:function(e){
+                    console.log(e)
+                    if(e>0){
+                      layer.msg('删除成功！', {icon: 1});
+                      setTimeout(shuax,700);
+                      function shuax(){
+                        window.location.reload();
+                      }
+                    }else{
+                      layer.msg('删除失败！', {icon: 2});
+                    }
+                  },
+              });
+        }, function(){
+          
+        });
+      }
+      
+      })
+    </script>
+	</body>
+	
+</html>

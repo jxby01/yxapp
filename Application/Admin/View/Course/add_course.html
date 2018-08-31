@@ -1,0 +1,658 @@
+
+		
+	<!--	<div class="am-g">-->
+		<!-- ============================================================== -->
+		<!-- Start right Content here -->
+		<div class="content-page">
+			<!-- Start content -->
+			<div class="content">
+				<div class="am-g">
+					<!-- Row start -->
+						<div class="am-u-sm-12">
+							<div class="card-box">
+								
+								<h4 class="header-title m-t-0 m-b-30">添加课程</h4>
+								
+								<div class="am-g">
+									<div class="am-u-md-6">
+										<div class="am-form-group">
+										<button class="am-btn am-btn-primary" onClick="cut(1)">基本信息</button>
+										<button class="am-btn am-btn-primary" onClick="cut(2)">banner设置</button>
+										<button class="am-btn am-btn-primary" onClick="cut(3)">课程安排</button>
+										</div>
+										<form class="am-form am-text-sm" id="bt1" style="display: block;" action="" method="post"  enctype="multipart/form-data">
+											<div class="am-form-group">
+												<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">课程名称</label>
+											      <input class="am-u-md-10 form-control kcname" name="title" id="title" placeholder="输入课程名称">
+										      </div>
+										    </div>
+										    <div class="am-form-group">
+												<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">课程图片</label>
+											      <input class="am-u-md-10 form-control kcimg" type="file" name="img" accept="image/*" id="img" placeholder="选择上传图片">
+										      </div>
+										    </div>
+										    <div class="am-form-group">
+												<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">课程地区</label>
+											      <input class="am-u-md-10 form-control" name="address" id="address" placeholder="输入所属地区">
+										      </div>
+										    </div>
+										    <div class="am-form-group">
+										    	<div class="am-g">
+										    		<label class="am-u-md-2 am-md-text-right" for="doc-select-1">选择主题</label>
+												      <div class="am-u-md-10 am-padding-0">
+												      <select name="line_cloumn_id" id="line_cloumn_id">
+												       <foreach name="cloumn" item="val">
+												        <option value="{$val['id']}">{$val['title']}</option>
+												       </foreach>
+												      </select>
+												      </div>
+												      <span class="am-form-caret"></span>
+										    	</div>
+										    </div>
+										    <div class="am-form-group">
+										    	<div class="am-g">
+										    		<label class="am-u-md-2 am-md-text-right" for="doc-select-1">选择年级</label>
+										    		<div class="am-u-md-10 am-padding-0">
+												      <select onchange="get_label(this.value)" name="grade" id="grade">
+												        <option value="0">请选择年级</option>
+												        <option value="一年级">一年级</option>
+												        <option value="二年级">二年级</option>
+												        <option value="三年级">三年级</option>
+												        <option value="四年级">四年级</option>
+												        <option value="五年级">五年级</option>
+												        <option value="六年级">六年级</option>
+												      </select>
+												      </div>
+												      <span class="am-form-caret"></span>
+										    	</div>
+										    </div>
+										    <div class="am-form-group">
+										    	<div class="am-g">
+										    		<label class="am-u-md-2 am-md-text-right" for="doc-select-1">选择标签</label>
+												      
+												      <span id="label"></span>
+										    	</div>
+										    </div>
+										    <div class="am-form-group">
+												<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">课程天数</label>
+											      <input class="am-u-md-10 form-control" name="day_time" id="day_time" placeholder="输入课程天数">
+										      </div>
+										    </div>
+										    <div class="am-form-group">
+												<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ipt-text-1">适应年龄</label>
+											      <input class="am-u-md-10 form-control" name="age" id="age" placeholder="输入适应年龄">
+										      </div>
+										    </div>
+										    <div class="am-form-group">
+										    	<div class="am-g">
+										    		<label class="am-u-md-2 am-md-text-right" for="doc-select-1">选择专家</label>
+												      <div class="am-u-md-10 am-padding-0">
+												      <select name="user_id" id="user_id">
+												       <foreach name="expert" item="val">
+												        <option value="{$val['id']}">{$val['username']}</option>
+												       </foreach>
+												      </select>
+												      </div>
+												      <span class="am-form-caret"></span>
+										    	</div>
+										    </div>
+										    <div class="am-form-group">
+										    	<div class="am-g">
+										    		<label class="am-u-md-2 am-md-text-right" for="doc-select-1">推荐星级</label>
+										    		<div class="am-u-md-10 am-padding-0">
+												      <select name="star" id="star">
+												        <option value="5">五颗星</option>
+												        <option value="4">四颗星</option>
+												        <option value="3">三颗星</option>
+												        <option value="2">二颗星</option>
+												        <option value="1">一颗星</option>
+												      </select>
+												      </div>
+												      <span class="am-form-caret"></span>
+										    	</div>
+										    </div>
+										    <div class="am-form-group">
+										    	<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">课程简介</label>
+											      <div class="am-u-md-10 am-padding-0">
+											      <textarea name="courses_provide" id="courses_provide" placeholder="简介信息" class="am-u-md-10 form-control" style="min-height: 200px;min-width: 730px;" rows="5"></textarea>
+											      </div>
+										    	</div>
+										    </div>
+										    <div class="am-form-group">
+										    	<div class="am-g">
+											      <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">课程特色</label>
+											      <div class="am-u-md-10 am-padding-0">
+											      <textarea name="courses_item" placeholder="摘要信息" class="am-u-md-10 form-control textarea" style="min-height: 600px;min-width: 530px;" rows="5" id="courses_item"></textarea>
+											      </div>
+										    	</div>
+										    </div>
+										</form>
+										<form action="" id="bt2" style="display: none">
+											<div class="am-form-group">
+										    	<div class="am-g">
+												    <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">banner设置</label>
+												    <div class="am-u-md-10 am-padding-0">
+												    	<input type="button" class="am-btn am-btn-primary" style="width:300px" value="再传一张" onclick="add()">
+											    	</div>
+										    	</div>
+										    </div>
+										    <div class="am-form-group">
+										    	<div class="am-g">
+												    <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1"></label>
+												    <div class="am-u-md-10 am-padding-0">
+												    	<div id="updtailes">
+												    		<div>
+												    		<div onClick="document.getElementById('input1').click()">
+																<button type="button" class="am-btn am-btn-primary" style="width:300px">选择文件</button>
+																<input type="file" style="display: none;" id="input1" onchange="yulan(this)" name="banner" multiple="multiple" accept="image/*">
+															</div>
+															<button type="button" onclick="updel(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+															</div>
+												    	</div>
+											    	</div>
+										    	</div>
+										    </div>
+										    <div id="yulandiv" style="width:500px;position: absolute;top: 0;right: -750px;"></div>
+										</form>
+										
+										<form action="" id="bt3" style="display: none;">
+											<div class="am-form-group">
+										    	<div class="am-g">
+												    <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">课程安排</label>
+												    <div class="am-u-md-10 am-padding-0">
+												    	<input type="button" class="am-btn am-btn-primary" style="width:300px;" value="增加一天" onclick="to_data()">
+											    	</div>
+										    	</div>
+										    </div>
+										     <div class="am-form-group" id="day">
+										    	<div class="am-g">
+												    <label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">
+												    <input type="text" class="form-control" name="set_day" style="width:50%;" value="L1"></label>
+												    <div class="am-u-md-10 am-padding-0">
+												    	<div style="line-height: 38px;">上午：<!-- <button type="button" class="am-btn am-btn-primary" style="width:260px" onClick="">增加上午安排</button> --><button style="height:38px;float: right;margin-right:54%;" type="button" onclick="day_del(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button></div>
+												    	<div id="am1">
+													    	<div style="margin-top: 8px;margin-bottom: 1em;">
+													    		<input type="time" name="am_start_time" class="am-u-md-2 form-control" value="08:00">
+													    		<span style="float: left;line-height: 38px;">--</span>
+													    		<input type="time" name="am_end_time" class="am-u-md-2 form-control" value="11:30">
+													    		<!-- <button style="height:38px;float: left;margin-left:1em;" type="button" onclick="updel(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button> -->
+													    		<div style="clear:both;"></div>
+												    			<textarea name="am_cont" id="" style="width:300px;height:200px;margin-top:1em;"></textarea>
+													    	</div>
+														</div>
+												    	<div style="line-height: 38px;">下午：<!-- <button type="button" class="am-btn am-btn-primary" style="width:260px">增加下午安排</button> --></div>
+												    	<div id="pm1">
+													    	<div style="margin-top: 8px;margin-bottom: 1em;">
+													    		<input type="time" name="pm_start_time" class="am-u-md-2 form-control" value="14:00">
+													    		<span style="float: left;line-height: 38px;">--</span>
+													    		<input type="time" name="pm_end_time" class="am-u-md-2 form-control" value="17:00">
+													    		<!-- <button style="height:38px;float: left;margin-left:1em;" type="button" onclick="updel(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button> -->
+													    		<div style="clear:both;"></div>
+												    			<textarea name="pm_cont" id="" style="width:300px;height:200px;margin-top:1em;"></textarea>
+													    	</div>
+												    	</div>
+												    	<div style="line-height: 38px;">晚上：<!-- <button type="button" class="am-btn am-btn-primary" style="width:260px">增加晚上安排</button> --></div>
+												    	<div id="em1">
+													    	<div style="margin-top: 8px;margin-bottom: 1em;">
+													    		<input type="time" name="em_start_time" class="am-u-md-2 form-control" value="19:00">
+													    		<span style="float: left;line-height: 38px;">--</span>
+													    		<input type="time" name="em_end_time" class="am-u-md-2 form-control" value="21:00">
+													    		<!-- <button style="height:38px;float: left;margin-left:1em;" type="button" onclick="updel(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button> -->
+													    		<div style="clear:both;"></div>
+												    			<textarea name="em_cont" id="" style="width:300px;height:200px;margin-top:1em;"></textarea>
+													    	</div>
+													    </div>
+											    	</div>
+										    	</div>
+										    </div>
+										</form>
+										<div  class="am-btn am-btn-primary" id="rtn-ajax">确定</div>
+									</div>
+							</div>
+						</div>
+					<!-- Row end -->
+				</div>
+			
+			
+			
+				<!-- col end -->
+				
+				
+			<!-- row end -->
+			
+			
+			
+				<!-- col end -->
+				
+				
+				<!-- col end -->
+			</div>
+			<!-- row end -->
+			
+			</div>
+		</div>
+		<!-- end right Content here -->
+		<!--</div>-->
+		</div>
+		</div>
+		
+		<!-- navbar -->
+		<a href="admin-offcanvas" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"><!--<i class="fa fa-bars" aria-hidden="true"></i>--></a>
+		
+		<script type="text/javascript" src="__PUBLIC__/Admin/assetsl/js/jquery-2.1.0.js" ></script>
+		<script type='text/javascript' src='__PUBLIC__/Admin/assetsl/js/layer/layer.js' ></script>
+		<script type="text/javascript" src="__PUBLIC__/Admin/layui/layui.js" ></script>
+		<script charset="utf-8" src="__PUBLIC__/Admin/kindeditor/kindeditor-all.js"></script>
+		<!-- <script charset="utf-8" src="__PUBLIC__/Admin/kindeditor/lang/zh-CN.js"></script> -->
+		<script>
+
+		layui.use('laydate', function(){
+		  var laydate = layui.laydate;
+		  //时间选择器
+		  laydate.render({
+		    elem: '.text-time'
+		    ,type: 'time'
+		  });
+		});
+
+	        KindEditor.ready(function(K) {
+                window.editor = K.create('.textarea',{
+				pasteType:1
+				});
+	        });
+	        /**
+	         * [cut description]
+	         * @return {[type]} [description]
+	         * 切换类别
+	         */
+	        function cut(v){
+	        	if(v==1){
+	        		$("#bt1").attr('style','display:block;');
+	        		$("#bt2").attr('style','display:none;');
+	        		$("#bt3").attr('style','display:none;');
+	        	}
+	        	if(v==2){
+	        		$("#bt1").attr('style','display:none;');
+	        		$("#bt2").attr('style','display:block;');
+	        		$("#bt3").attr('style','display:none;');
+	        	}
+	        	if(v==3){
+	        		$("#bt1").attr('style','display:none;');
+	        		$("#bt2").attr('style','display:none;');
+	        		$("#bt3").attr('style','display:block;');
+	        	}
+	        }
+	        /**
+	         * [get_label description]
+	         * @param  {[type]} val [description]
+	         * @return {[type]}     [description]
+	         * 获取年级对应标签
+	         */
+	        function get_label(val){
+	        	$.ajax({
+			      url:"{:U('CourseLogic/get_label')}",
+			      type:"post",
+			      data:{
+			        grade:val
+			      },
+			      success:function(e){
+			        console.log(e)
+			        var srt='';
+			        for(var i=0;i<e.length;i++){
+			        	srt += "<label><input type='checkbox' name='label[]' value='"+e[i].title+"'>"+e[i].title+"</label><input style='width:40px;margin-right: 8px;' name='ratio[]'>";
+			        }
+			        $("#label").html(srt);
+			        // layer.msg(e, {icon: 1});
+			        // setTimeout(shuax,1000);
+			        // function shuax(){
+			        //   window.location.reload();
+			        // }
+			      },
+			    });
+	        }
+	        /***/
+	        //增加图片上传框框
+			var inputid=2;
+			function add(){
+				var input="'input"+inputid+"'";
+				var html='<div><div onClick="document.getElementById('+input+').click()"><button type="button" class="am-btn am-btn-primary" style="width:300px">选择文件</button><input type="file" style="display: none;" id="input'+inputid+'" onchange="yulan(this)" name="banner" multiple="multiple" accept="image/*"></div><button type="button" onclick="updel(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button></div>';
+				$('#updtailes').append(html);
+				inputid++;
+			}
+			//产品详情图预览
+			function yulan(obj){
+				//var file =document.getElementsByName('xqimgs');	
+				// console.log(obj.id)
+				
+				var result=document.getElementById("yulandiv");			
+			    var tp=obj.files;
+				var reader    = new FileReader();		
+		        reader.readAsDataURL(tp[0]);  //异步
+		        if($("#"+obj.id+"img").attr('src')){
+					// console.log($("#"+obj.id+"img").attr('src'))
+					reader.onload=function(e){
+						$("#"+obj.id+"img").attr('src',this.result)
+					}
+		        }else{
+		        	reader.onload=function(e){
+						var newNode = document.createElement("img");
+						newNode.setAttribute("src", this.result);
+						newNode.setAttribute("id", obj.id+'img');
+						newNode.style.width="500px";
+						result.appendChild(newNode); 
+						// console.log($("#"+obj.id+"img").attr('src'))
+					}
+		        }
+			}
+			/**
+			 * [updel description]
+			 * @param  {[type]} obj [description]
+			 * @return {[type]}     [description]
+			 * 删除图片和上传框
+			 */
+			function updel(obj){
+				//removeChild(aaa)
+				console.log(obj.parentNode);
+				obj.parentNode.remove();
+				// return false;
+				//删除图片
+				var input_id=obj.parentNode.getElementsByTagName('input')[0].id;
+				var dimg=document.getElementById(input_id+'img');
+				if(dimg){
+					var result=document.getElementById("yulandiv");	
+					result.removeChild(dimg);
+				}
+			}
+			/**
+			 * [to_data description]
+			 * @return {[type]} [description]
+			 * 添加新的一天安排
+			 */
+			var d=2;
+			function to_data(){
+				var add_day = '<div class="am-g">'+
+				    '<label class="am-u-md-2 am-md-text-right am-padding-left-0" for="doc-ta-1">'+
+				    '<input type="text" class="form-control" name="set_day" style="width:50%;" value="L'+d+'"></label>'+
+				   ' <div class="am-u-md-10 am-padding-0">'+
+				    	'<div style="line-height: 38px;">上午：'+
+				    	'<button style="height:38px;float: right;margin-right:54%;" type="button" onclick="day_del(this)" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>'+
+				    	// '<button type="button" class="am-btn am-btn-primary" style="width:260px" onClick="">增加上午安排</button></div>'+
+				    	'</div>'+
+				    	'<div id="am'+d+'">'+
+					    	'<div style="margin-top: 8px;margin-bottom: 1em;">'+
+					    		'<input type="time" name="am_start_time" class="am-u-md-2 form-control" value="08:00">'+
+					    		'<span style="float: left;line-height: 38px;">--</span>'+
+					    		'<input type="time" name="am_end_time" class="am-u-md-2 form-control" value="11:30">'+
+					    		'<div style="clear:both;"></div>'+
+				    			'<textarea name="am_cont" id="" style="width:300px;height:200px;margin-top:1em;"></textarea>'+
+					    	'</div>'+
+						'</div>'+
+				    	'<div style="line-height: 38px;">下午：'+
+				    	// '<button type="button" class="am-btn am-btn-primary" style="width:260px">增加下午安排</button></div>'+
+				    	'</div>'+
+				    	'<div id="pm'+d+'">'+
+					    	'<div style="margin-top: 8px;margin-bottom: 1em;">'+
+					    		'<input type="time" name="pm_start_time" class="am-u-md-2 form-control" value="14:00">'+
+					    		'<span style="float: left;line-height: 38px;">--</span>'+
+					    		'<input type="time" name="pm_end_time" class="am-u-md-2 form-control" value="17:00">'+
+					    		'<div style="clear:both;"></div>'+
+				    			'<textarea name="pm_cont" id="" style="width:300px;height:200px;margin-top:1em;"></textarea>'+
+					    	'</div>'+
+				    	'</div>'+
+				    	'<div style="line-height: 38px;">晚上：'+
+				    	// '<button type="button" class="am-btn am-btn-primary" style="width:260px">增加晚上安排</button></div>'+
+				    	'</div>'+
+				    	'<div id="em'+d+'">'+
+					    	'<div style="margin-top: 8px;margin-bottom: 1em;">'+
+					    		'<input type="time" name="em_start_time" class="am-u-md-2 form-control" value="19:00">'+
+					    		'<span style="float: left;line-height: 38px;">--</span>'+
+					    		'<input type="time" name="em_end_time" class="am-u-md-2 form-control" value="21:00">'+
+					    		'<div style="clear:both;"></div>'+
+				    			'<textarea name="em_cont" id="" style="width:300px;height:200px;margin-top:1em;"></textarea>'+
+					    	'</div>'+
+				    	'</div>'+
+			    	'</div>'+
+		    	'</div>';
+		    	// console.log(add_day)
+		    	$('#day').append(add_day);
+		    	d++;
+			}
+			/**
+			 * [day_del description]
+			 * @return {[type]} [description]
+			 * 删除对应的天
+			 */
+			function day_del(that){
+				var t = that.parentNode.parentNode.parentNode;
+				t.remove();
+			}
+			/**
+			 * [getObjectURL description]
+			 * @param  {[type]} file [description]
+			 * @return {[type]}      [description]
+			 * 图片--获取预览图片路径
+			 */
+			function getObjectURL(file) {
+				var url = null ;
+				if (window.createObjectURL!=undefined) { // basic
+					url = window.createObjectURL(file) ;
+				} else if (window.URL!=undefined) { // mozilla(firefox)
+					url = window.URL.createObjectURL(file) ;
+				} else if (window.webkitURL!=undefined) { // webkit or chrome
+					url = window.webkitURL.createObjectURL(file) ;
+				}
+				return url ;
+			}
+			/**	
+			 * [description]
+			 * @param  {[type]} ){	                     	var label [description]
+			 * @return {[type]}      [description]
+			 * form表单ajax提交
+			 */
+	        $('#rtn-ajax').click(function(){
+	        	var formData = new FormData(); 
+	        	
+				var title = $('#title').val();//课程名称
+				if(title==''){
+					layer.msg('请输入课程名称', {icon: 2});
+					return false;
+				}
+				var img = document.getElementById("img").files[0];
+				if(img.length<1){
+					layer.msg('选择课程图片', {icon: 2});
+					return false;
+				}
+			  	//var img = getObjectURL(file[0]) ; //获取图片的路径，该路径不是图片在本地的路径
+			  	var address = $('#address').val();
+			  	if (!address) {
+			  		layer.msg('请输入课程地区', {icon: 2});
+					return false;
+			  	}
+			  	var line_cloumn_id=$('#line_cloumn_id').val();
+			  	if (!line_cloumn_id) {
+			  		layer.msg('请选择课程主题', {icon: 2});
+					return false;
+			  	}
+			  	var grade = $("#grade").val();
+			  	if (grade==0 || !grade) {
+			  		layer.msg('请选择年级', {icon: 2});
+					return false;
+			  	}
+			  	// console.log(grade)
+			  	//获取课程标签
+	        	var label=document.getElementsByName('label[]'); 
+	        	var ratio=document.getElementsByName('ratio[]'); 
+				var str=[]; 
+				for(var i=0; i<label.length; i++){
+					if(label[i].checked){
+						str[i] = [label[i].value,ratio[i].value]; 
+					}
+				}
+				if(str.length<1){
+					layer.msg('请选择课程标签和对应的百分比', {icon: 2});
+					return false;
+				}
+				console.log(str);
+				console.log(JSON.stringify(str))
+			  	var day_time = $("#day_time").val();
+			  	if (!day_time) {
+			  		layer.msg('请输入课程天数', {icon: 2});
+					return false;
+			  	}
+			  	var age = $("#age").val();
+			  	if (!age) {
+			  		layer.msg('请输入适应年龄', {icon: 2});
+					return false;
+			  	}
+			  	var user_id = $("#user_id").val();
+			  	if (!user_id) {
+			  		layer.msg('请选择专家', {icon: 2});
+					return false;
+			  	}
+			  	var star = $("#star").val();
+			  	if (!star) {
+			  		layer.msg('请选择推荐星级', {icon: 2});
+					return false;
+			  	}
+			  	var courses_provide=$("#courses_provide").val();
+			  	if (!courses_provide) {
+			  		layer.msg('请输入课程简介', {icon: 2});
+					return false;
+			  	}
+				var courses_item = editor.html();
+				if (!courses_item) {
+			  		layer.msg('请输入课程特色', {icon: 2});
+					return false;
+			  	}
+			  	//banner设置
+			  	var banner_length = $('input[name="banner"]').length;
+			  	if(banner_length<1){
+			  		layer.msg('请增加banner', {icon: 2});
+					return false;
+			  	}
+				for(var i=0;i<banner_length;i++){
+					var banner = $('input[name="banner"]')[i].files[0]
+					formData.append("banner"+i, banner);//banner
+					if(!$('input[name="banner"]')[i].files[0]){
+				  		layer.msg('请上传完善banner', {icon: 2});
+						return false;
+				  	}
+				}
+				// console.log(JSON.stringify(banner))
+			  	// 内容安排
+			  	var set_day_length = $('input[name="set_day"]').length;
+	        	if(set_day_length<1){
+	        		layer.msg('请增加安排天数', {icon: 2});
+					return false;
+	        	}
+	        	var arrange='{';
+	        	for(var k=0;k<set_day_length;k++){
+ 	        		var set_day=$('input[name="set_day"]')[k].value;
+	        		var am_start_time=$('input[name="am_start_time"]')[k].value;
+	        		var am_end_time=$('input[name="am_end_time"]')[k].value;
+	        		var am_cont=$('textarea[name="am_cont"]')[k].value;
+	        		var pm_start_time=$('input[name="pm_start_time"]')[k].value;
+	        		var pm_end_time=$('input[name="pm_end_time"]')[k].value;
+	        		var pm_cont=$('textarea[name="pm_cont"]')[k].value;
+	        		var em_start_time=$('input[name="em_start_time"]')[k].value;
+	        		var em_end_time=$('input[name="em_end_time"]')[k].value;
+	        		var em_cont=$('textarea[name="em_cont"]')[k].value;
+	        		if(!set_day){
+	        			layer.msg('请输入安排天数', {icon: 2});
+						return false;
+	        		}
+	        		if(!am_start_time){
+	        			layer.msg('请输入早上开始时间', {icon: 2});
+						return false;
+	        		}
+	        		if(!am_end_time){
+	        			layer.msg('请输入早上结束时间', {icon: 2});
+						return false;
+	        		}
+	        		if(!am_cont){
+	        			layer.msg('请输入早上安排内容', {icon: 2});
+						return false;
+	        		}
+	        		if(!pm_start_time){
+	        			layer.msg('请输入下午开始时间', {icon: 2});
+						return false;
+	        		}
+	        		if(!pm_end_time){
+	        			layer.msg('请输入下午结束时间', {icon: 2});
+						return false;
+	        		}
+	        		if(!pm_cont){
+	        			layer.msg('请输入下午安排内容', {icon: 2});
+						return false;
+	        		}
+	        		if(!em_start_time){
+	        			layer.msg('请输入晚上开始时间', {icon: 2});
+						return false;
+	        		}
+	        		if(!em_end_time){
+	        			layer.msg('请输入晚上结束时间', {icon: 2});
+						return false;
+	        		}
+	        		if(!em_cont){
+	        			layer.msg('请输入晚上安排内容', {icon: 2});
+						return false;
+	        		}
+	        		if(k==set_day_length-1){
+	        			arrange += '"'+$('input[name="set_day"]')[k].value+'":{"am":{"'+$('input[name="am_start_time"]')[k].value+'-'+$('input[name="am_end_time"]')[k].value+'":"'+$('textarea[name="am_cont"]')[k].value+'"},"pm":{"'+$('input[name="pm_start_time"]')[k].value+'-'+$('input[name="pm_end_time"]')[k].value+'":"'+$('textarea[name="pm_cont"]')[k].value+'"},"em":{"'+$('input[name="em_start_time"]')[k].value+'-'+$('input[name="em_end_time"]')[k].value+'":"'+$('textarea[name="em_cont"]')[k].value+'"}}';
+	        		}else{
+	        			arrange += '"'+$('input[name="set_day"]')[k].value+'":{"am":{"'+$('input[name="am_start_time"]')[k].value+'-'+$('input[name="am_end_time"]')[k].value+'":"'+$('textarea[name="am_cont"]')[k].value+'"},"pm":{"'+$('input[name="pm_start_time"]')[k].value+'-'+$('input[name="pm_end_time"]')[k].value+'":"'+$('textarea[name="pm_cont"]')[k].value+'"},"em":{"'+$('input[name="em_start_time"]')[k].value+'-'+$('input[name="em_end_time"]')[k].value+'":"'+$('textarea[name="em_cont"]')[k].value+'"}},';
+	        		}
+	        	}
+	        	arrange += '}';
+	        	// console.log(JSON.parse(arrange));
+	        	// ajax提交form数据
+			  	
+				formData.append("arrange", arrange);//安排内容详细
+				// formData.append("banner", banner);//banner
+				formData.append("courses_item", courses_item);//courses_item课程特色
+				formData.append("courses_provide", courses_provide);//课程介绍
+				formData.append("user_id", user_id);//课程专家id
+				formData.append("age", age);//课程适应年龄
+				formData.append("day_time", day_time);//课程天数
+				formData.append("grade", grade);//课程年级
+				formData.append("line_cloumn_id", line_cloumn_id);//课程主题id
+				formData.append("address", address);//课程地区
+				formData.append("img", img);//课程缩略图
+				formData.append("name", title);//课程标题
+				formData.append("star", star);//课程标题
+				formData.append("label", JSON.stringify(str));//课程标签占比json
+			    $.ajax({
+					type: 'post',
+					url: '{:U("CourseLogic/add_course")}',
+					data: formData, 
+					cache: false,
+					contentType: false, 
+					processData: false, 
+					success: function(data){
+						console.log(data)
+						if(data=='添加成功'){
+							layer.msg(data,{icon:1});
+							setTimeout(shuax,1500); 
+							function shuax(){
+								window.location="{:U('Course/course_list')}"
+							}
+						}else{
+							layer.msg(data,{icon:2,time:1000});
+						}
+					},
+					error:function(data) {
+						layer.msg('网络请求失败!',{icon:2,time:1000});
+						console.log(data.msg);
+					},
+				});
+	        })
+		</script>
+	</body>
+	
+</html>

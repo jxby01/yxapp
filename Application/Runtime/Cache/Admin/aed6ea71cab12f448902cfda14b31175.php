@@ -86,10 +86,8 @@ $(function(){
 		window.location.href="<?php echo U('Admin/Power/power_add');?>";
 	})
 })
-
 function power_del(id){
-
-	if(id == 3){
+	if(id == 1){
 		alert('该操作系统不允许！！');return false;
 	}else{
         $.ajax({
@@ -97,17 +95,17 @@ function power_del(id){
             data:{id:id},
             url:'<?php echo U("Admin/Power/power_del");?>',
             success:function(data){
+                console.log(data)
                 if(data == 1){
                     alert('删除成功');
+                    window.location.reload();
                 }else{
                     alert('删除出错....');
                 }
             }
         })
     }
-
 }
-
 function power_edit(id){
 	if(id == 3){
 		alert('该操作系统不允许！！');

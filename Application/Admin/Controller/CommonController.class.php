@@ -34,7 +34,7 @@ class CommonController extends Controller{
 		// $file=$_FILES['file'];
 		// $name=$file['name'];
 		$type = strtolower(substr($file_name,strrpos($file_name,'.')+1)); //得到文件类型，并且都转化成小写
-		$allow_type = array('jpg','jpeg','gif','png'); 
+		$allow_type = array('jpg','jpeg','gif','png','xls','xlsx');
 		//判断文件类型是否被允许上传
 		if(!in_array($type, $allow_type)){
 		//如果不被允许，则直接停止程序运行

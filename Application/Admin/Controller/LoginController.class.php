@@ -5,13 +5,14 @@ class LoginController extends Controller {
     public function login(){//加载页面
 		$this->display('login/login');
   }
-  
-  public function logout(){//退出登录
-		unset($_SESSION['name']);
+  //退出登录
+  public function logout(){
+		// session_unset();
+		session_destroy();
 		$this->redirect('Login/login',array(),2,'<meta charset="utf-8"/>安全退出中...');
 	}
-	
-	public function check_code(){//检验验证码
+	//检验验证码
+	public function check_code(){
 		if(!empty($_POST)){
 			$verify = new \Think\Verify();
 			$code = $_POST['code'];
@@ -23,8 +24,8 @@ class LoginController extends Controller {
 			}
 		}
 	}
-	
-	public function check_passw(){//检验登录是否正确
+	//检验登录是否正确
+	public function check_passw(){
 		if(!empty($_POST)){
 			$adminname = $_POST['name'];
 			$password = sha1($_POST['password']);
@@ -48,8 +49,8 @@ class LoginController extends Controller {
 			
 		}
 	}
-	
-	public function verify(){//生成验证码
+	//生成验证码
+	public function verify(){
 		$Verify =     new \Think\Verify();
 		$Verify->fontSize = 18;
 		$Verify->length   = 4;
@@ -57,8 +58,8 @@ class LoginController extends Controller {
 		$Verify->entry();
 		
 	}
-	
-	public function checkname(){//是否重名
+	//是否重名
+	public function checkname(){
 		$username = $_POST['username'];
 		$sql = M('admin')->where(array('username'=>$username))->select();
 		if(!empty($sql)){

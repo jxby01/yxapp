@@ -2331,7 +2331,7 @@ output {
 .am-form input[type="datetime-local"],
 .am-form input[type="date"],
 .am-form input[type="month"],
-.am-form input[type="time"],
+/*.am-form input[type="time"],*/
 .am-form input[type="week"],
 .am-form input[type="number"],
 .am-form input[type="email"],
@@ -2365,7 +2365,7 @@ output {
 .am-form input[type="datetime-local"]:focus,
 .am-form input[type="date"]:focus,
 .am-form input[type="month"]:focus,
-.am-form input[type="time"]:focus,
+/*.am-form input[type="time"]:focus,*/
 .am-form input[type="week"]:focus,
 .am-form input[type="number"]:focus,
 .am-form input[type="email"]:focus,
@@ -2384,7 +2384,7 @@ output {
 .am-form input[type="datetime-local"]:focus,
 .am-form input[type="date"]:focus,
 .am-form input[type="month"]:focus,
-.am-form input[type="time"]:focus,
+/*.am-form input[type="time"]:focus,*/
 .am-form input[type="week"]:focus,
 .am-form input[type="number"]:focus,
 .am-form input[type="email"]:focus,
@@ -2407,7 +2407,7 @@ output {
 .am-form input[type="datetime-local"]::-webkit-input-placeholder,
 .am-form input[type="date"]::-webkit-input-placeholder,
 .am-form input[type="month"]::-webkit-input-placeholder,
-.am-form input[type="time"]::-webkit-input-placeholder,
+/*.am-form input[type="time"]::-webkit-input-placeholder,*/
 .am-form input[type="week"]::-webkit-input-placeholder,
 .am-form input[type="number"]::-webkit-input-placeholder,
 .am-form input[type="email"]::-webkit-input-placeholder,
@@ -2426,7 +2426,7 @@ output {
 .am-form input[type="datetime-local"]::-moz-placeholder,
 .am-form input[type="date"]::-moz-placeholder,
 .am-form input[type="month"]::-moz-placeholder,
-.am-form input[type="time"]::-moz-placeholder,
+/*.am-form input[type="time"]::-moz-placeholder,*/
 .am-form input[type="week"]::-moz-placeholder,
 .am-form input[type="number"]::-moz-placeholder,
 .am-form input[type="email"]::-moz-placeholder,
@@ -2445,7 +2445,7 @@ output {
 .am-form input[type="datetime-local"]:-ms-input-placeholder,
 .am-form input[type="date"]:-ms-input-placeholder,
 .am-form input[type="month"]:-ms-input-placeholder,
-.am-form input[type="time"]:-ms-input-placeholder,
+/*.am-form input[type="time"]:-ms-input-placeholder,*/
 .am-form input[type="week"]:-ms-input-placeholder,
 .am-form input[type="number"]:-ms-input-placeholder,
 .am-form input[type="email"]:-ms-input-placeholder,
@@ -2464,7 +2464,7 @@ output {
 .am-form input[type="datetime-local"]::placeholder,
 .am-form input[type="date"]::placeholder,
 .am-form input[type="month"]::placeholder,
-.am-form input[type="time"]::placeholder,
+/*.am-form input[type="time"]::placeholder,*/
 .am-form input[type="week"]::placeholder,
 .am-form input[type="number"]::placeholder,
 .am-form input[type="email"]::placeholder,
@@ -2483,7 +2483,7 @@ output {
 .am-form input[type="datetime-local"]::-moz-placeholder,
 .am-form input[type="date"]::-moz-placeholder,
 .am-form input[type="month"]::-moz-placeholder,
-.am-form input[type="time"]::-moz-placeholder,
+/*.am-form input[type="time"]::-moz-placeholder,*/
 .am-form input[type="week"]::-moz-placeholder,
 .am-form input[type="number"]::-moz-placeholder,
 .am-form input[type="email"]::-moz-placeholder,
@@ -2502,7 +2502,7 @@ output {
 .am-form input[type="datetime-local"][disabled],
 .am-form input[type="date"][disabled],
 .am-form input[type="month"][disabled],
-.am-form input[type="time"][disabled],
+/*.am-form input[type="time"][disabled],*/
 .am-form input[type="week"][disabled],
 .am-form input[type="number"][disabled],
 .am-form input[type="email"][disabled],
@@ -2519,7 +2519,7 @@ output {
 .am-form input[type="datetime-local"][readonly],
 .am-form input[type="date"][readonly],
 .am-form input[type="month"][readonly],
-.am-form input[type="time"][readonly],
+/*.am-form input[type="time"][readonly],*/
 .am-form input[type="week"][readonly],
 .am-form input[type="number"][readonly],
 .am-form input[type="email"][readonly],
@@ -2536,7 +2536,7 @@ fieldset[disabled] .am-form input[type="datetime"],
 fieldset[disabled] .am-form input[type="datetime-local"],
 fieldset[disabled] .am-form input[type="date"],
 fieldset[disabled] .am-form input[type="month"],
-fieldset[disabled] .am-form input[type="time"],
+/*fieldset[disabled] .am-form input[type="time"],*/
 fieldset[disabled] .am-form input[type="week"],
 fieldset[disabled] .am-form input[type="number"],
 fieldset[disabled] .am-form input[type="email"],
@@ -2556,7 +2556,7 @@ fieldset[disabled] .am-form-field {
 .am-form input[type="datetime-local"].am-radius,
 .am-form input[type="date"].am-radius,
 .am-form input[type="month"].am-radius,
-.am-form input[type="time"].am-radius,
+/*.am-form input[type="time"].am-radius,*/
 .am-form input[type="week"].am-radius,
 .am-form input[type="number"].am-radius,
 .am-form input[type="email"].am-radius,
@@ -2575,7 +2575,7 @@ fieldset[disabled] .am-form-field {
 .am-form input[type="datetime-local"].am-round,
 .am-form input[type="date"].am-round,
 .am-form input[type="month"].am-round,
-.am-form input[type="time"].am-round,
+/*.am-form input[type="time"].am-round,*/
 .am-form input[type="week"].am-round,
 .am-form input[type="number"].am-round,
 .am-form input[type="email"].am-round,
