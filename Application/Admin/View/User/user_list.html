@@ -13,7 +13,8 @@
 		          <div class="am-btn-toolbar">
 		            <div class="am-btn-group am-btn-group-xs">
 		              <button type="button" class="am-btn am-btn-default"><a href="{:U('User/user_add')}"><span class="am-icon-plus"></span> 新增</a></button>
-		              <!-- <button type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span> 审核</button> -->
+		              <button type="button" class="am-btn am-btn-default" onClick="document.getElementById('excel').click()"><span class="am-icon-archive"></span> 导入用户</button>
+                  <input type="file" style="display: none;" onchange="upload_excel(this);" id="excel" multiple="multiple" accept=".xlsx,.xls">
 		              <button type="button" class="am-btn am-btn-default plshanc"><span class="am-icon-trash-o"></span> 删除</button>
 		            </div>
 		          </div>
@@ -74,6 +75,7 @@
                 <th class="table-author am-hide-sm-only">学校</th>
                 <th class="table-date am-hide-sm-only">年级</th>
                 <th class="table-date am-hide-sm-only">班级</th>
+                <th class="table-date am-hide-sm-only">生日</th>
                 <th class="table-date am-hide-sm-only">成长值</th>
                 <th class="table-set">操作</th>
               </tr>
@@ -89,6 +91,7 @@
                   <td class="am-hide-sm-only">{$val['school']}</td>
                   <td class="am-hide-sm-only">{$val['grade']}</td>
                   <td class="am-hide-sm-only">{$val['ban']}</td>
+                  <td class="am-hide-sm-only">{$val['birthday']}</td>
                   <td class="am-hide-sm-only">{$val['integral']}</td>
                   <td>
                     <div class="am-btn-toolbar">
@@ -138,13 +141,39 @@
 		<!-- navbar -->
 		<a href="admin-offcanvas" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"><!--<i class="fa fa-bars" aria-hidden="true"></i>--></a>
 		
-		<script type="text/javascript" src="../assets/js/jquery-2.1.0.js" ></script>
-		<script type="text/javascript" src="../assets/js/amazeui.min.js"></script>
-		<script type="text/javascript" src="../assets/js/app.js" ></script>
-		<script type="text/javascript" src="../assets/js/blockUI.js" ></script>
+
 		<script type="text/javascript" src="__PUBLIC__/Admin/assetsl/js/jquery-2.1.0.js" ></script>
     <script type="text/javascript" src="__PUBLIC__/Admin/assetsl/js/layer/layer.js" ></script>
     <script type="text/javascript">
+      /*上传导入用户excel*/
+      function upload_excel(that){
+        // console.log(that.files[0])
+        var formData = new FormData();
+        formData.append("excel", that.files[0]);
+        $.ajax({
+          type: 'post',
+          url: '{:U("UserLogic/import")}',
+          data: formData, 
+          cache: false,
+          contentType: false, 
+          processData: false, 
+          success: function(data){
+            console.log(data.code)
+            if(data.success){
+              layer.msg('成功导入'+data.success+'条记录，失败'+data.error+'条记录',{icon:1});
+              setTimeout(shuax,1500);
+              function shuax(){
+                window.location="{:U('User/user_list')}";
+              }
+            }else{
+              layer.msg('导入失败'+data.error+'条记录！',{icon:2,time:1000});
+            }
+          },
+          error:function(data) {
+            layer.msg('网络请求失败!',{icon:2,time:1000});
+          },
+        });
+      }
       //设置权重
       function sort(){
         var winputs=document.getElementsByName('sort');
@@ -210,10 +239,10 @@
             }  
   
         }else{  
-            for(var j=0;j<one.length;j++){  
-                one[j].checked=false;  
-            }  
-        }  
+          for(var j=0;j<one.length;j++){
+              one[j].checked=false;
+          }
+        }
       }
       //批量删除
       $('.plshanc').click(function(){

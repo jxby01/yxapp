@@ -164,6 +164,7 @@ class LineController extends CommonController {
     		alert('请输入项目时间','3000',2);
     		exit;
     	}
+        $_POST['end_time'] = date('Y-m-d H:i:s',strtotime("$_POST['star_time'] +$_POST['this_time'] day"));
     	if(!$_POST['curriculum_id']){
     		alert('请选择课程','3000',2);
     		exit;
@@ -210,6 +211,7 @@ class LineController extends CommonController {
     		alert('请输入项目时间','3000',2);
     		exit;
     	}
+        $_POST['end_time'] = date('Y-m-d H:i:s',strtotime("$_POST['star_time'] + $_POST['this_time'] day"));
     	if(!$_POST['curriculum_id']){
     		alert('请选择课程','3000',2);
     		exit;

@@ -86,9 +86,7 @@ $(function(){
 		window.location.href="<?php echo U('Admin/Power/power_add');?>";
 	})
 })
-
 function power_del(id){
-
 	if(id == 1){
 		alert('该操作系统不允许！！');return false;
 	}else{
@@ -107,9 +105,7 @@ function power_del(id){
             }
         })
     }
-
 }
-
 function power_edit(id){
 	if(id == 3){
 		alert('该操作系统不允许！！');

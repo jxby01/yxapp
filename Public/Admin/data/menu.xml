@@ -95,11 +95,11 @@
 			<en>list</en>
 			<link><![CDATA[Line/line]]></link>
 		</controller>
-		<controller>
+		<!-- <controller>
 			<name id="19">线路主题</name>
 			<en>list</en>
 			<link><![CDATA[Line/line_details]]></link>
-		</controller>
+		</controller> -->
 	</module>
 	<module>
 		<name id="20">用户提醒</name>
